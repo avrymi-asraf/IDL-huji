@@ -551,16 +551,8 @@ today
 \end_layout
 
 \begin_layout Standard
-ראשית, נשים לב כי ה
-\begin_inset Formula $loss$
-\end_inset
-
- הגבוה ביותר הוא 
-\begin_inset Formula $180$
-\end_inset
-
-.
- לאור זה, נוכל לקבוע את השיטה הבאה:
+ראשית, נחשב את הערך המוחלט של ההפרש בין הזוויות, ואז נחזיר את המינימום בינו
+ לבין המרחק המעגלי אילו היינו הולכים מהצד השני:
 \end_layout
 
 \begin_layout Standard
@@ -570,7 +562,7 @@ today
 \numeric off
 .
  קלט: 
-\begin_inset Formula $x\in[0,360]$
+\begin_inset Formula $true\ angle,pred$
 \end_inset
 
 .
@@ -582,40 +574,8 @@ today
 2
 \numeric off
 .
- באופן איטרטיבי:
-\end_layout
-
-\begin_layout Standard
-
-\numeric on
-2.1
-\numeric off
  
-\begin_inset Formula $prev=x$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\numeric on
-2.2
-\numeric off
- 
-\begin_inset Formula $x=x-180$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-
-\numeric on
-2.3
-\numeric off
- 
-\begin_inset Formula $if\ x\leq0\ break$
+\begin_inset Formula $true\ angle=true\ angle\%360,pred=pred\%360$
 \end_inset
 
 .
@@ -627,8 +587,34 @@ today
 3
 \numeric off
 .
- החזר את: 
-\begin_inset Formula $min\left(\left|x\right|,prev\right)$
+ 
+\begin_inset Formula $diff=\left|true\ angle-pred\right|$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+4
+\numeric off
+.
+ 
+\begin_inset Formula $circular\ diff=360-diff$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+5
+\numeric off
+.
+ 
+\begin_inset Formula $return:\min\left(diff,circular\ diff\right)$
 \end_inset
 
 .
@@ -663,6 +649,22 @@ today
 \noun default
 \color inherit
 4
+\end_layout
+
+\begin_layout Standard
+א(
+\end_layout
+
+\begin_layout Standard
+ב( 
+\end_layout
+
+\begin_layout Standard
+ג(
+\end_layout
+
+\begin_layout Standard
+ד(
 \end_layout
 
 \begin_layout Standard
