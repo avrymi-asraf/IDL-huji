@@ -324,6 +324,7 @@ status open
 \shape default
 \size default
 \emph default
+\numeric on
 \bar default
 \strikeout default
 \xout default
@@ -331,7 +332,9 @@ status open
 \uwave default
 \noun default
 \color inherit
-??????????????????????????? 
+315774570
+\numeric off
+ 
 \end_layout
 
 \begin_layout Plain Layout
@@ -505,6 +508,77 @@ today
 2
 \numeric off
  
+\end_layout
+
+\begin_layout Standard
+א( 
+\begin_inset Formula $\min\left(10\left(x-1\right)^{2}+\frac{\left(y+1\right)^{2}}{10}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+אז, הנוסחה לעדכון המשקולות ע
+\begin_inset Quotes erd
+\end_inset
+
+פ שיטת 
+\begin_inset Formula $GD$
+\end_inset
+
+ תהיה באופן הבא )עדכון לפי צעד התקדמות בכפל בגרדיאנט(:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+A^{n+1}=A^{n}-\mu\left(\begin{array}{c}
+20x_{n}-20\\
+\frac{y_{n}+1}{5}
+\end{array}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ב( נרצה לוודא שקצב השינוי לא יגדל בצורה אקספוננציאלית.
+ נבדוק אם כן בנפרד עבור 
+\begin_inset Formula $x,y$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+y_{n+1}=y_{n}-\mu\left(\frac{y_{n}}{5}+\frac{2}{5}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+נשים לב כי עבור 
+\begin_inset Formula $\mu=5$
+\end_inset
+
+, מתקיים: 
+\begin_inset Formula $y_{n+1}=2$
+\end_inset
+
+, כלומר, במצב כזה הגרדיאנט לא מתכנס לעולם.
+ עבור ערכי 
+\begin_inset Formula $\mu$
+\end_inset
+
+ גדולים יותר, הגרדיאנט יחליף כיוון בכל צעד ולא יתכנס לעולם.
 \end_layout
 
 \begin_layout Section
