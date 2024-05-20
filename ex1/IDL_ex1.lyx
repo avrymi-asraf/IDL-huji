@@ -531,9 +531,17 @@ today
 \end_layout
 
 \begin_layout Standard
+נסמן 
+\begin_inset Formula $\theta=\left(x,y\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \[
-A^{n+1}=A^{n}-\mu\left(\begin{array}{c}
+\theta^{n+1}=\theta^{n}-\mu\left(\begin{array}{c}
 20x_{n}-20\\
 \frac{y_{n}+1}{5}
 \end{array}\right)
@@ -545,18 +553,18 @@ A^{n+1}=A^{n}-\mu\left(\begin{array}{c}
 \end_layout
 
 \begin_layout Standard
-ב( נרצה לוודא שקצב השינוי לא יגדל בצורה אקספוננציאלית.
- נבדוק אם כן בנפרד עבור 
-\begin_inset Formula $x,y$
+ב( נמצא 
+\begin_inset Formula $\mu_{max}$
 \end_inset
 
-:
-\end_layout
+ המקיים שלכל 
+\begin_inset Formula $\nu<\mu_{max}$
+\end_inset
 
-\begin_layout Standard
+ 
 \begin_inset Formula 
 \[
-y_{n+1}=y_{n}-\mu\left(\frac{y_{n}}{5}+\frac{2}{5}\right)
+\lim_{n\to\infty}\left\Vert \theta_{n}-\theta_{n-1}\right\Vert _{L1}\ne\infty
 \]
 
 \end_inset
@@ -565,20 +573,136 @@ y_{n+1}=y_{n}-\mu\left(\frac{y_{n}}{5}+\frac{2}{5}\right)
 \end_layout
 
 \begin_layout Standard
-נשים לב כי עבור 
-\begin_inset Formula $\mu=5$
+כלומר, הפרמטרים מתפוצצים.
+\end_layout
+
+\begin_layout Standard
+נכתוב את הביטוי של 
+\begin_inset Formula $x$
 \end_inset
 
-, מתקיים: 
-\begin_inset Formula $y_{n+1}=2$
+ בצורה קאנונית:
+\begin_inset Formula 
+\[
+x_{n}=x_{n-1}-\mu\left(Ax_{n-1}+B\right)
+\]
+
 \end_inset
 
-, כלומר, במצב כזה הגרדיאנט לא מתכנס לעולם.
- עבור ערכי 
+
+\end_layout
+
+\begin_layout Standard
+נפתח את הביטוי
+\begin_inset Formula 
+\[
+\left|x_{n+1}-x_{n}\right|=\left|x_{n}-\mu\left(Ax_{n}+B\right)-x_{n}\right|=\left|\mu\left(Ax_{n}+B\right)\right|
+\]
+
+\end_inset
+
+ אם כן, נוכל לנסח את השאלה כך
+\end_layout
+
+\begin_layout Standard
+בהינתן 
+\begin_inset Formula $A,B$
+\end_inset
+
+ וערך אקראי של 
+\begin_inset Formula $d_{0}$
+\end_inset
+
+, נגדיר את הסדרה 
+\begin_inset Formula $d_{n}=\mu\left(Ad_{n-1}+B\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+מהו הערך המקסימלי של 
 \begin_inset Formula $\mu$
 \end_inset
 
- גדולים יותר, הגרדיאנט יחליף כיוון בכל צעד ולא יתכנס לעולם.
+ המקיים: 
+\begin_inset Formula 
+\[
+\lim_{n\to\infty}\left|d_{n}\right|=\infty
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+נשים לב כי
+\begin_inset Formula 
+\begin{align*}
+d_{n} & =\mu\left(Ad_{n-1}+B\right)\\
+= & \mu Ad_{n-1}+\mu B\\
+= & \mu A\left(\mu Ad_{n-2}+\mu B\right)+\mu B\\
+= & \mu A\left(\mu A\left(\mu Ad_{n-3}+\mu B\right)+\mu B\right)+\mu B\\
+= & \left(\mu A\right)^{n}d_{0}+\sum_{i=0}^{n-1}\left(\mu A\right)^{i}\mu B
+\end{align*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+אזי, אם 
+\begin_inset Formula $\mu A\geq1$
+\end_inset
+
+, 
+\begin_inset Formula 
+\begin{align*}
+ & \lim_{n\to\infty}\left|d_{n}\right|\\
+= & \lim_{n\to\infty}\left|x_{n}-x_{n-1}\right|=\infty
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ועבור 
+\begin_inset Formula $\mu A<1$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lim_{n\to\infty}\left|d_{n}\right|=\sum_{i=0}^{n-1}\left(\mu A\right)^{i}\mu B\ne\infty
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+במקרה שלנו, עבור המשתנים 
+\begin_inset Formula $x,y$
+\end_inset
+
+ בהתאמה.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mu_{max}=\text{\ensuremath{\min\left(\frac{1}{20},5\right)}}=\frac{1}{20}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
