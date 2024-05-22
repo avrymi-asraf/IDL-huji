@@ -558,7 +558,7 @@ today
 \end_inset
 
  המקיים שלכל 
-\begin_inset Formula $\nu<\mu_{max}$
+\begin_inset Formula $\mu<\mu_{max}$
 \end_inset
 
  
@@ -628,7 +628,7 @@ x_{n}=x_{n-1}-\mu\left(Ax_{n-1}+B\right)
  המקיים: 
 \begin_inset Formula 
 \[
-\lim_{n\to\infty}\left|d_{n}\right|=\infty
+\lim_{n\to\infty}\left|d_{n}\right|\ne\infty
 \]
 
 \end_inset
@@ -654,7 +654,7 @@ d_{n} & =\mu\left(Ad_{n-1}+B\right)\\
 
 \begin_layout Standard
 אזי, אם 
-\begin_inset Formula $\mu A\geq1$
+\begin_inset Formula $\left|\mu A\right|\geq1$
 \end_inset
 
 , 
@@ -671,7 +671,7 @@ d_{n} & =\mu\left(Ad_{n-1}+B\right)\\
 
 \begin_layout Standard
 ועבור 
-\begin_inset Formula $\mu A<1$
+\begin_inset Formula $\left|\mu A\right|<1$
 \end_inset
 
 
@@ -703,6 +703,58 @@ d_{n} & =\mu\left(Ad_{n-1}+B\right)\\
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+ג( נוכל להסיק שמה שקובע את קצב הלמידה הוא הסקלר הגדול ביותר שכופל את הביטויים
+ מהצורה
+\begin_inset Formula $\left(x-1\right)^{2}\text{ or }\left(y-1\right)^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ד( ייקח ל
+\begin_inset Formula $y$
+\end_inset
+
+ יותר זמן להתכנס.
+ זאת מאחר שקצב הלמידה המקסימלי עבורו גדול יותר מהקצב המקסימלי עבור ה
+\begin_inset Formula $x$
+\end_inset
+
+ - השינוי שמתבצע אצלו בכל איטרציה קטן יותר, וכאשר גם קצב השינוי הוא חסום
+ ע
+\begin_inset Quotes erd
+\end_inset
+
+י הקצב של 
+\begin_inset Formula $x$
+\end_inset
+
+, נקבל כי 
+\begin_inset Formula $x$
+\end_inset
+
+ מתכנס בקצב המהיר ביותר עבורו, אולם 
+\begin_inset Formula $y$
+\end_inset
+
+ יישאר מאחור, ויתקדם לאט יותר, כלומר ייקח לו יותר זמן להתכנס.
+ אילו היינו רוצים להתקדם בקצב שיאפשר ל
+\begin_inset Formula $y$
+\end_inset
+
+ להתכנס בקצב מהיר - המשמעות היתה ש
+\begin_inset Formula $x$
+\end_inset
+
+ לא יתכנס - ולכן אנחנו נאלצים לשלם את המחיר של התכנסות איטית של 
+\begin_inset Formula $y$
+\end_inset
+
+ כדי לאפשר את ההתכנסות של המשוואה בכללותה.
 \end_layout
 
 \begin_layout Section
@@ -760,7 +812,7 @@ d_{n} & =\mu\left(Ad_{n-1}+B\right)\\
 \numeric off
 .
  קלט: 
-\begin_inset Formula $true\ angle,pred$
+\begin_inset Formula $true\ angle,pred\in[0,360)$
 \end_inset
 
 .
@@ -773,7 +825,7 @@ d_{n} & =\mu\left(Ad_{n-1}+B\right)\\
 \numeric off
 .
  
-\begin_inset Formula $true\ angle=true\ angle\%360,pred=pred\%360$
+\begin_inset Formula $diff=\left|true\ angle-pred\right|$
 \end_inset
 
 .
@@ -786,7 +838,7 @@ d_{n} & =\mu\left(Ad_{n-1}+B\right)\\
 \numeric off
 .
  
-\begin_inset Formula $diff=\left|true\ angle-pred\right|$
+\begin_inset Formula $circular\ diff=360-diff$
 \end_inset
 
 .
@@ -799,23 +851,22 @@ d_{n} & =\mu\left(Ad_{n-1}+B\right)\\
 \numeric off
 .
  
-\begin_inset Formula $circular\ diff=360-diff$
+\begin_inset Formula $return:\frac{\min\left(diff,circular\ diff\right)}{180}$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-
-\numeric on
-5
-\numeric off
-.
- 
-\begin_inset Formula $return:\min\left(diff,circular\ diff\right)$
+)נעיר כי כפי שלמדנו בכיתה, פונקציית 
+\begin_inset Formula $\min$
 \end_inset
 
-.
+ היא גזירה, ולכן זוהי פונקציית 
+\begin_inset Formula $loss$
+\end_inset
+
+ לגיטימית(.
 \end_layout
 
 \begin_layout Section
@@ -851,6 +902,14 @@ d_{n} & =\mu\left(Ad_{n-1}+B\right)\\
 
 \begin_layout Standard
 א(
+\begin_inset Formula 
+\[
+\frac{\partial}{\partial x}f\left(x+y,2x,z\right)=?????????????????
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -858,7 +917,25 @@ d_{n} & =\mu\left(Ad_{n-1}+B\right)\\
 \end_layout
 
 \begin_layout Standard
+\begin_inset Formula 
+\[
+F'\left(x\right)=f_{1}'\circ...f_{n-1}\circ f_{n}\left(\right)\cdot f_{2}'\circ...f_{n-1}\circ f_{n}\left(\right)=\prod_{j\in\left[n\right]}f_{j}'\circ f_{j-1}\circ...\circ f_{n}\left(x\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 ג(
+\begin_inset Formula 
+\[
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
