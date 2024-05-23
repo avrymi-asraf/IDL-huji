@@ -468,13 +468,64 @@ today
 \end_layout
 
 \begin_layout Standard
-ב( נראה כי הרכבה של טרספורמציות אפיניות היא טרנספורמציה אפינית:
+ב( נוכיח כי הרכבה של שני פונקצייות אפיניות היא פונקצייה אפינית ואז נוכל
+ להוכיח באינדוקציה שכל הרכבה של פונקציות אפיניות אפינית ג“כ
 \end_layout
 
 \begin_layout Standard
+יהיו f,g פונקציות אפיניות, אזי 
+\begin_inset Formula $f\circ g=F\left(Gx+a\right)+b$
+\end_inset
 
-\color red
-להשלים
+ כאשר FוG המטריצות המייצגות של ההעתקה וa וb ווקטור האפיניות.
+ 
+\end_layout
+
+\begin_layout Standard
+נוכיח כי קיימת מטריצה Qווקטור d כך ש
+\begin_inset Formula $f\circ g\left(x\right)=Qx+d$
+\end_inset
+
+ מלינאריות של כפל מטריצות 
+\begin_inset Formula $F\left(Gx+a\right)+b=FGx+Fa+b$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+נסמן 
+\begin_inset Formula $FG=Q$
+\end_inset
+
+ ו
+\begin_inset Formula $Fa+b=d$
+\end_inset
+
+ אלו ביטויים שלא תלויים בx.
+ 
+\end_layout
+
+\begin_layout Standard
+אזי 
+\begin_inset Formula $f\circ g\left(x\right)=Qx+d$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כנדרש.
+ 
+\end_layout
+
+\begin_layout Standard
+באינדקציה, כל הרכבת פונקציות אפיניות ניתנת לייצוג כפונקציה אפינית יחידה.
+ 
+\end_layout
+
+\begin_layout Standard
+,
 \end_layout
 
 \begin_layout Section
