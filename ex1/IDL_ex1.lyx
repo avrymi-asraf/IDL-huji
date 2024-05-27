@@ -473,16 +473,44 @@ today
 \end_layout
 
 \begin_layout Standard
-יהיו f,g פונקציות אפיניות, אזי 
+יהיו 
+\begin_inset Formula $f,g$
+\end_inset
+
+ פונקציות אפיניות, אזי 
 \begin_inset Formula $f\circ g=F\left(Gx+a\right)+b$
 \end_inset
 
- כאשר FוG המטריצות המייצגות של ההעתקה וa וb ווקטור האפיניות.
+ כאשר 
+\begin_inset Formula $F$
+\end_inset
+
+ ו
+\begin_inset Formula $G$
+\end_inset
+
+ המטריצות המייצגות של ההעתקה ו
+\begin_inset Formula $a$
+\end_inset
+
+ ו
+\begin_inset Formula $b$
+\end_inset
+
+ ווקטור האפיניות.
  
 \end_layout
 
 \begin_layout Standard
-נוכיח כי קיימת מטריצה Qווקטור d כך ש
+נוכיח כי קיימת מטריצה 
+\begin_inset Formula $Q$
+\end_inset
+
+ ווקטור 
+\begin_inset Formula $d$
+\end_inset
+
+ כך ש
 \begin_inset Formula $f\circ g\left(x\right)=Qx+d$
 \end_inset
 
@@ -522,10 +550,6 @@ today
 \begin_layout Standard
 באינדקציה, כל הרכבת פונקציות אפיניות ניתנת לייצוג כפונקציה אפינית יחידה.
  
-\end_layout
-
-\begin_layout Standard
-,
 \end_layout
 
 \begin_layout Section
@@ -1004,6 +1028,105 @@ F'\left(x\right)=f_{1}'\circ...f_{n-1}\circ f_{n}\left(\right)\cdot f_{2}'\circ.
 
 \bar under
 חלק מעשי
+\end_layout
+
+\begin_layout Standard
+א(
+\end_layout
+
+\begin_layout Standard
+בחרנו לייצג את הקלט בתור ווקטור עם 
+\begin_inset Formula $180$
+\end_inset
+
+כניסות.
+ המחשבה מאחורי הייצוג היא שיש 
+\begin_inset Formula $9$
+\end_inset
+
+ אותיות, וכל אחת יכולה להיות אחת מתוך 
+\begin_inset Formula $20$
+\end_inset
+
+ חומצות אמינו שונות.
+ כך, יצרנו מיפוי של חומצת אמינו לאינדקס, ובתוך כל בלוק של 
+\begin_inset Formula $20$
+\end_inset
+
+ כניסות, רק אחת תהיה 
+\begin_inset Formula $1$
+\end_inset
+
+, באינדקס המתאים לחומצת האמינו שמופתה אליו.
+ כל שאר הכניסות יהיו 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ כך, נוכל לפענח קלט של 
+\begin_inset Formula $9$
+\end_inset
+
+ אותיות המייצגות חומצות אמינו, למיפוי של 
+\begin_inset Formula $20\cdot i+j$
+\end_inset
+
+ עבור כל אות, כאשר 
+\begin_inset Formula $i$
+\end_inset
+
+ היא האינדקס של האות בתוך הרצף, ו
+\begin_inset Formula $j$
+\end_inset
+
+ הוא המיפוי של האות לאינדקס הרלוונטי.
+\end_layout
+
+\begin_layout Standard
+בצורה הזו, אנחנו מצד אחד לא עושים 
+\begin_inset Formula $one\ hot\ vector$
+\end_inset
+
+ עבור כל 
+\begin_inset Formula $20^{9}$
+\end_inset
+
+ האפשרויות השונות, ומצד שני
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ מתגברים על הבעיה של יצירת יחס סדר בין חומצות אמינו שונות, שכן זוהי תכונה
+ לא רצויה בייצוג שלנו את הקלט.
+\end_layout
+
+\begin_layout Standard
+ב( 
+\end_layout
+
+\begin_layout Standard
+בהתאם להנ
+\begin_inset Quotes erd
+\end_inset
+
+ל, הכמות של הנויירונים הפנימיים ברשת תהיה 
+\begin_inset Formula $180$
+\end_inset
+
+ בכל שכבה פנימית.
+ נריץ את הרשת שלנו על הדאטה, ונבחן את התוצאה:
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \end_body
