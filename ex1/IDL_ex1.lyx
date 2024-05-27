@@ -469,7 +469,7 @@ today
 
 \begin_layout Standard
 ב( נוכיח כי הרכבה של שני פונקצייות אפיניות היא פונקצייה אפינית ואז נוכל
- להוכיח באינדוקציה שכל הרכבה של פונקציות אפיניות אפינית ג“כ
+ להוכיח באינדוקציה שכל הרכבה של פונקציות אפיניות אפינית ג“כ.
 \end_layout
 
 \begin_layout Standard
@@ -478,7 +478,11 @@ today
 \end_inset
 
  פונקציות אפיניות, אזי 
-\begin_inset Formula $f\circ g=F\left(Gx+a\right)+b$
+\begin_inset Formula 
+\[
+f\circ g=F\left(Gx+a\right)+b
+\]
+
 \end_inset
 
  כאשר 
@@ -497,7 +501,7 @@ today
 \begin_inset Formula $b$
 \end_inset
 
- ווקטור האפיניות.
+ ווקטור.
  
 \end_layout
 
@@ -511,11 +515,19 @@ today
 \end_inset
 
  כך ש
-\begin_inset Formula $f\circ g\left(x\right)=Qx+d$
+\begin_inset Formula 
+\[
+f\circ g\left(x\right)=Qx+d
+\]
+
 \end_inset
 
  מלינאריות של כפל מטריצות 
-\begin_inset Formula $F\left(Gx+a\right)+b=FGx+Fa+b$
+\begin_inset Formula 
+\[
+F\left(Gx+a\right)+b=FGx+Fa+b
+\]
+
 \end_inset
 
 .
@@ -977,9 +989,12 @@ d_{n} & =\mu\left(Ad_{n-1}+B\right)\\
 
 \begin_layout Standard
 א(
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \[
-\frac{\partial}{\partial x}f\left(x+y,2x,z\right)=?????????????????
+\frac{\partial}{\partial x}f\left(x+y,2x,z\right)=\frac{\partial f}{\partial x+y}\frac{\partial x+y}{\partial x}+\frac{\partial f}{\partial2x}\frac{\partial2x}{x}=\frac{\partial f}{\partial x+y}\cdot1+\frac{\partial f}{\partial2x}\cdot2
 \]
 
 \end_inset
@@ -1005,8 +1020,34 @@ F'\left(x\right)=f_{1}'\circ...f_{n-1}\circ f_{n}\left(\right)\cdot f_{2}'\circ.
 \begin_layout Standard
 ג(
 \begin_inset Formula 
-\[
-\]
+\begin{align*}
+ & \frac{\partial}{\partial x}\left(x,f_{2}\left(x,...f_{n-1}\left(x,f_{n}\left(x\right)\right)\right)\right)\\
+= & \frac{\partial f_{1}}{x}+\frac{\partial f_{1}}{\partial f_{2}\left(x,...f_{n}\left(x\right)\right)}\frac{\partial f_{2}\left(x,...f_{n}\left(x\right)\right)}{x}\\
+= & \frac{\partial f_{1}}{x}+\frac{\partial f_{1}}{\partial f_{2}\left(x,...f_{n}\left(x\right)\right)}\left(\frac{\partial f_{2}}{x}+\frac{\partial f_{2}}{\partial f_{3}\left(x,...f_{n}\left(x\right)\right)}\frac{\partial f_{3}\left(x,...f_{n}\left(x\right)\right)}{x}\right)\\
+= & \frac{\partial f_{1}}{x}+\frac{\partial f_{1}}{\partial f_{2}\left(x,...f_{n}\left(x\right)\right)}\frac{\partial f_{2}}{x}+\frac{\partial f_{1}}{\partial f_{2}\left(x,...f_{n}\left(x\right)\right)}\frac{\partial f_{2}}{\partial f_{3}\left(x,...f_{n}\left(x\right)\right)}\frac{\partial f_{3}\left(x,...f_{n}\left(x\right)\right)}{x}\\
+= & \sum_{i=1}^{n}\frac{\partial f_{i}}{\partial x}\prod_{j=2}^{i}\frac{\partial f_{j-1}}{\partial f_{j}\left(x,...f_{n}\left(x\right)\right)}\\
+= & \sum_{i=1}^{n}\prod_{j=2}^{i}\frac{\partial f_{i}}{\partial x}\frac{\partial f_{j-1}}{\partial f_{j}\left(x,...f_{n}\left(x\right)\right)}
+\end{align*}
+
+\end_inset
+
+ כאשר עבור 
+\begin_inset Formula $i=1$
+\end_inset
+
+ 
+\begin_inset Formula $\frac{\partial f_{j-1}}{\partial f_{j}\left(x,...f_{n}\left(x\right)\right)}=1$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+= & \frac{\partial}{\partial x}f_{1}\left(x,f_{2}\left(x,f_{3}\left(x\right)\right)\right)\\
+= & \frac{\partial f_{1}}{\partial x}+\frac{\partial f_{2}}{\partial x}\frac{\partial f_{1}}{\partial f_{2}\left(x,f_{3}\left(x\right)\right)}+\frac{\partial f_{3}}{x}\frac{\partial f_{2}}{f_{3}\left(x\right)}\frac{\partial f_{1}}{\partial f_{2}\left(x,f_{3}\left(x\right)\right)}
+\end{align*}
 
 \end_inset
 
