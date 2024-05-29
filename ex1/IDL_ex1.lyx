@@ -1055,7 +1055,9 @@ F'\left(x\right)=f_{1}'\circ...f_{n-1}\circ f_{n}\left(\right)\cdot f_{2}'\circ.
 \end_layout
 
 \begin_layout Standard
-ד(
+ד( 
+\color red
+להשלים
 \end_layout
 
 \begin_layout Standard
@@ -1167,7 +1169,251 @@ F'\left(x\right)=f_{1}'\circ...f_{n-1}\circ f_{n}\left(\right)\cdot f_{2}'\circ.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Graphics
+	filename ex1_180_take2.png
+	scale 50
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ניכר שהמודל מבצע 
+\begin_inset Formula $over\ fit$
+\end_inset
+
+, כבר אחרי
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+15
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+אפוקים.
+ כלומר, המודל אקספריסבי מידי, וצריך להחליש אותו על מנת להצליח יותר על הטסט.
+\end_layout
+
+\begin_layout Standard
+ג(
+\end_layout
+
+\begin_layout Standard
+עברנו לארכיטקטורה אחרת, שבה השכבה הפנימית הראשונה היא עם 
+\begin_inset Formula $7$
+\end_inset
+
+ נוירונים, והשכבה הפנימית השניה היא עם 
+\begin_inset Formula $3$
+\end_inset
+
+ נוירונים.
+ הקלט נשאר 
+\begin_inset Formula $180$
+\end_inset
+
+, והפלט נשאר 
+\begin_inset Formula $1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+ניתן לראות כאן כי התגברנו על הבעיה של 
+\begin_inset Formula $over\ fit$
+\end_inset
+
+ אחרי 
+\begin_inset Formula $15$
+\end_inset
+
+ אפוקים:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename ex1_7_3_take2.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ניתן לראות כי במצב הזה, המודל חלש יותר, ואיננו מבצע 
+\begin_inset Formula $over\ fit$
+\end_inset
+
+ על הדאטה אחרי
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+15
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+אפוקים.
+\end_layout
+
+\begin_layout Standard
+ד(
+\end_layout
+
+\begin_layout Standard
+נבחן את המצב כאשר נוריד את האקטיבציות של הרשת, ובכך נשווה את האקספרסיביות
+ שלה לשכבה לינארית בודדת.
+ נוכל לראות כי הרשת מציגה תוצאות טובות פחות על הטסט, אבל לא רחוקות מהמצב
+ שכולל את האקטיבציות:
+\end_layout
+
+\begin_layout Standard
+- עם אקטיבציות:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename ex1_non_linear2.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+- בלי האקטיבציות:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename ex1_linear_no_activation.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ייתכן שניתן להסביר זאת בכך שהדאטה עצמו איננו כה מורכב, כלומר - איננו נדרשים
+ להשתמש דווקא ברשת נויירונים עמוקה בכדי לפתור את הבעיה, או לחלופין, וזה
+ הסבר שנראה לנו יותר - ניתן להגיע לרף מסויים של דיוק באמצעות שכבה לינארית
+ רגילה, ומכאן כדי להשיג שיפור הבעיה היא כה מורכבת, עד כי גם הרשת העמוקה
+ שלנו לא מצליחה לשפר אותה בצורה משמעותית.
+ כלומר, מדובר בבעיה עם שתי מדרגות קושי, את דרגת הקושי הראשונה קל להשיג,
+ ואילו את הדרגה השניה משמעותית יותר קשה, וגם הרשת שלנו לא צולחת את האתגר
+ הזה בצורה שהיא משמעותית טובה יותר מאשר שכבה לינארית רגילה.
+\end_layout
+
+\begin_layout Standard
+ה(
+\end_layout
+
+\begin_layout Standard
+נשתמש במודל שלנו כדי לנבא את הרצפים של הספייק אותם המודל שלנו מזהה בצורה
+ הטובה ביותר:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $'NCTEVPVAI','ALLAGTITS','FLVLLPLVS'$
+\end_inset
+
+.
 \end_layout
 
 \end_body
