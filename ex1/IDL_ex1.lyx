@@ -1056,8 +1056,70 @@ F'\left(x\right)=f_{1}'\circ...f_{n-1}\circ f_{n}\left(\right)\cdot f_{2}'\circ.
 
 \begin_layout Standard
 ד( 
-\color red
-להשלים
+\end_layout
+
+\begin_layout Standard
+נחשב את הנגזרת לפי 
+\begin_inset Formula $x$
+\end_inset
+
+ של 
+\begin_inset Formula $f(x+g(x+h(x)))$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+נסמן: 
+\begin_inset Formula $u=x+g(x+h(x))$
+\end_inset
+
+, 
+\begin_inset Formula $y=f(u)$
+\end_inset
+
+.
+ כעת, מכלל השרשרת, מתקיים: 
+\begin_inset Formula $\frac{\partial f}{\partial x}=\frac{\partial f}{\partial u}\frac{\partial u}{\partial x}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{\partial y}{\partial u}=f'(u)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $u=x+g(x+h(x))$
+\end_inset
+
+, 
+\begin_inset Formula $\frac{\partial u}{\partial x}=1+g'\left(x+h\left(x\right)\right)\cdot\left(1+h'\left(x\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+ולכן,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f'\left(x+g\left(x+h\left(x\right)\right)\right)\cdot\left(1+g'\left(x+h\left(x\right)\right)\cdot\left(1+h'\left(x\right)\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כנדרש.
 \end_layout
 
 \begin_layout Standard
@@ -1165,7 +1227,15 @@ F'\left(x\right)=f_{1}'\circ...f_{n-1}\circ f_{n}\left(\right)\cdot f_{2}'\circ.
 \end_inset
 
  בכל שכבה פנימית.
- נריץ את הרשת שלנו על הדאטה, ונבחן את התוצאה:
+ כדי לאזן את הדאטה, התאמנו משקולת על פונקציית ה
+\begin_inset Formula $loss$
+\end_inset
+
+ כך שהיא תעניש יותר על פספוס של דגימות חיוביות.
+\end_layout
+
+\begin_layout Standard
+נריץ את הרשת שלנו על הדאטה, ונבחן את התוצאה:
 \end_layout
 
 \begin_layout Standard
@@ -1410,10 +1480,12 @@ F'\left(x\right)=f_{1}'\circ...f_{n-1}\circ f_{n}\left(\right)\cdot f_{2}'\circ.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $'NCTEVPVAI','ALLAGTITS','FLVLLPLVS'$
+\begin_inset Graphics
+	filename spike_top3_1.jpg
+
 \end_inset
 
-.
+
 \end_layout
 
 \end_body
