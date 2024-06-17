@@ -135,8 +135,9 @@ def train_classifier_encoder(model, train_loader, test_loader, epochs, loss_func
 
     if save_model:
         torch.save(model.encoder.state_dict(), ENCODER_PATH_CLASSIFIER)
-    px.line(record_data).to_image(save_path)
-    px.line(record_data).show()
+    fig = px.line(record_data)
+    fig.write_image(save_path)
+    fig.show()
 
 def train_AE(model, train_loader, test_loader, epochs, loss_func=nn.L1Loss(), device=DEVICE):
     model = model.to(device)
