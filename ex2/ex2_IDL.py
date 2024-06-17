@@ -16,9 +16,9 @@ class ConvAutoEncoder(nn.Module):
 
         # Encoder
         self.encoder = nn.Sequential(
-            nn.Conv2d(1, 4, 3, stride=2, padding=1),  # (batch, 16, 14, 14)
+            nn.Conv2d(1, 4, 3, stride=2, padding=1),
             nn.ReLU(),
-            nn.Conv2d(4, 8, 3, stride=2, padding=1),  # (batch, 32, 7, 7)
+            nn.Conv2d(4, 8, 3, stride=2, padding=1),
             nn.ReLU(),
             nn.Conv2d(8, 12, 7)  # (batch, , 1, 1)
         )
@@ -31,11 +31,11 @@ class ConvAutoDecoder(nn.Module):
         super(ConvAutoDecoder, self).__init__()
 
         self.decoder = nn.Sequential(
-            nn.ConvTranspose2d(12, 8, 7),  # (batch, 32, 7, 7)
+            nn.ConvTranspose2d(12, 8, 7),
             nn.ReLU(),
-            nn.ConvTranspose2d(8, 4, 3, stride=2, padding=1, output_padding=1),  # (batch, 16, 14, 14)
+            nn.ConvTranspose2d(8, 4, 3, stride=2, padding=1, output_padding=1),
             nn.ReLU(),
-            nn.ConvTranspose2d(4, 1, 3, stride=2, padding=1, output_padding=1),  # (batch, 1, 28, 28)
+            nn.ConvTranspose2d(4, 1, 3, stride=2, padding=1, output_padding=1),
             nn.Tanh()
         )
 
@@ -67,11 +67,20 @@ class MLP(nn.Module):
         x = self.fc2(x)
         return x
 
+class AE_MLP(nn.Module):
+    def __init__(self, pre_trained_encoder, input_size=12, hidden_size=50, output_size=10):
+        super(AE_MLP, self).__init__()
+        self.encoder = pre_trained_encoder
+        self.mlp = MLP(input_size, hidden_size, output_size)
 
-def trainAE(model,train_loader,test_loader, epochs, device=DEVICE):
+    def forward(self, x):
+        x = self.encoder(x)
+        x = self.mlp(x)
+        return x
+
+def train_model(model,train_loader,test_loader, epochs, loss_func=nn.L1Loss() ,device=DEVICE):
     model = model.to(device)
     optimazer = torch.optim.Adam(model.parameters())
-    loss_func = nn.L1Loss()
 
     record_data = pd.DataFrame({"train_loss":float(),"test_loss":float()},index=range(epochs))
 
@@ -87,21 +96,23 @@ def trainAE(model,train_loader,test_loader, epochs, device=DEVICE):
             optimazer.step()
             optimazer.zero_grad()
             train_loss += loss.item()
+        train_loss /= len(train_loader)
         for x, _ in tqdm(test_loader):
             model.eval()
-            x, _ = x.to(device)
+            x = x.to(device)
             predict = model(x)
             loss = loss_func(x, predict)
             test_loss += loss.item()
+        test_loss /= len(test_loader)
         record_data.iloc[epoch] = [train_loss, test_loss]
 
     torch.save(model.encoder.state_dict(), ENCODER_PATH)
     px.line(record_data).show()
 
-
-
-
 if __name__ == '__main__':
     train_loader, test_loader = import_MNIST_dataset()
     model = AE()
-    trainAE(model, train_loader, test_loader, 10)
+    train_model(model, train_loader, test_loader, 15)
+
+    ae_mlp = AE_MLP(torch.load(ENCODER_PATH))
+    train_model(ae_mlp, train_loader, test_loader, 15, nn.CrossEntropyLoss())
