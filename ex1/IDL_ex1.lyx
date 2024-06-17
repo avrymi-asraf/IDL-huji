@@ -1056,6 +1056,14 @@ F'\left(x\right)=f_{1}'\circ...f_{n-1}\circ f_{n}\left(\right)\cdot f_{2}'\circ.
 
 \begin_layout Standard
 ד(
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f\left(x+\right)}{}\\
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
