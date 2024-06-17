@@ -114,5 +114,5 @@ if __name__ == '__main__':
     model = AE()
     train_model(model, train_loader, test_loader, 15)
 
-    ae_mlp = AE_MLP(model.encoder)
+    ae_mlp = AE_MLP(torch.load(ENCODER_PATH))
     train_model(ae_mlp, train_loader, test_loader, 15, nn.CrossEntropyLoss())
