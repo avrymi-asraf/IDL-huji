@@ -10,6 +10,7 @@ import plotly.express as px
 
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 ENCODER_PATH = './encoder.pth'
+ENCODER_PATH_CLASSIFIER = './encoder_classifier.pth'
 
 
 class ConvAutoEncoder(nn.Module):
@@ -59,6 +60,19 @@ class AE(nn.Module):
         x = self.decoder(x)
         return x
 
+class AE_freeze_encoder(nn.Module):
+    def __init__(self, encoder):
+        super(AE_freeze_encoder, self).__init__()
+        self.encoder = encoder
+        self.decoder = ConvAutoDecoder()
+
+    def forward(self, x):
+        with torch.no_grad():
+            x = self.encoder(x)
+        x = self.decoder(x)
+        return x
+
+
 
 class MLP(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
@@ -91,7 +105,8 @@ def train_classifier_encoder(model, train_loader, test_loader, epochs, loss_func
     model = model.to(device)
     optimazer = torch.optim.Adam(model.parameters())
 
-    record_data = pd.DataFrame({"train_loss": float(), "test_loss": float(), "accuracy": float()}, index=range(epochs))
+    record_data = pd.DataFrame({"train_loss": float(), "test_loss": float(), "accuracy": float()},
+                               index=range(epochs))
 
     for epoch in range(epochs):
         train_loss = 0
@@ -101,7 +116,7 @@ def train_classifier_encoder(model, train_loader, test_loader, epochs, loss_func
             model.train()
             x, y = x.to(device), y.to(device)
             predict = model(x)
-            loss = loss_func(y, predict)
+            loss = loss_func(predict, y)
             loss.backward()
             optimazer.step()
             optimazer.zero_grad()
@@ -111,12 +126,17 @@ def train_classifier_encoder(model, train_loader, test_loader, epochs, loss_func
             model.eval()
             x, y = x.to(device), y.to(device)
             predict = model(x)
-            loss = loss_func(y, predict)
+            loss = loss_func(predict, y)
             test_loss += loss.item()
             accuracy += (predict.argmax(dim=1) == y).float().mean()
         test_loss /= len(test_loader)
         accuracy /= len(test_loader)
         record_data.iloc[epoch] = [train_loss, test_loss, accuracy]
+
+    if save_model:
+        torch.save(model.encoder.state_dict(), ENCODER_PATH_CLASSIFIER)
+    px.line(record_data).to_image(save_path)
+    px.line(record_data).show()
 
 def train_AE(model, train_loader, test_loader, epochs, loss_func=nn.L1Loss(), device=DEVICE):
     model = model.to(device)
@@ -155,12 +175,30 @@ if __name__ == '__main__':
     train_loader, test_loader = import_MNIST_dataset()
 
     # q1
-    # model = AE()
-    # train_AE(model, train_loader, test_loader, 2)
+    model = AE()
+    train_AE(model, train_loader, test_loader, 10, save_path='./q1.png')
 
     # q2
-    encoder = ConvAutoEncoder()
-    encoder.load_state_dict(torch.load(ENCODER_PATH))
+    ae_mlp = AE_MLP(ConvAutoEncoder())
+    train_classifier_encoder(ae_mlp, train_loader, test_loader, 10, save_path='./q2.png')
 
-    ae_mlp = AE_MLP(encoder)
-    train_classifier_encoder(ae_mlp, train_loader, test_loader, 15, nn.CrossEntropyLoss())
+    # q3
+    encoder = ConvAutoEncoder()
+    encoder.load_state_dict(torch.load(ENCODER_PATH_CLASSIFIER))  # load pre-trained encoder
+
+    ae_freeze = AE_freeze_encoder(encoder)
+    train_AE(ae_freeze, train_loader, test_loader, 10, save_model=False, save_path='./q3.png')
+
+    # q4
+    mini_train_loader, mini_test_loader = import_MNIST_dataset(mini_data=True)
+    model = AE()
+    train_AE(model, mini_train_loader, mini_test_loader, 20, save_path='./q4_AE.png')
+    model2 = AE_MLP(ConvAutoEncoder())
+    train_classifier_encoder(model2, mini_train_loader, mini_test_loader, 20, save_path='./q4_MLP.png')
+
+    # q5
+    encoder = ConvAutoEncoder()
+    encoder.load_state_dict(torch.load(ENCODER_PATH))  # load pre-trained encoder
+    pre_trained_encoder = AE_MLP(encoder)
+    train_classifier_encoder(pre_trained_encoder, mini_train_loader, mini_test_loader, 20, save_model=False,
+                             save_path='./q5.png')
