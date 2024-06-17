@@ -110,9 +110,13 @@ def train_model(model,train_loader,test_loader, epochs, loss_func=nn.L1Loss() ,d
     px.line(record_data).show()
 
 if __name__ == '__main__':
+    # data
     train_loader, test_loader = import_MNIST_dataset()
+
+    # q1
     model = AE()
     train_model(model, train_loader, test_loader, 15)
 
+    # q2
     ae_mlp = AE_MLP(torch.load(ENCODER_PATH))
     train_model(ae_mlp, train_loader, test_loader, 15, nn.CrossEntropyLoss())
