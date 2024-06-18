@@ -565,6 +565,93 @@ y'\left(t\right)= & \int_{-\infty}^{\infty}h\left(t_{0}+\tau\right)g\left(t-\tau
  
 \end_layout
 
+\begin_layout Standard
+עלינו לבדוק לגבי כל אחד מהמרכיבים האם הוא 
+\begin_inset Formula $TI$
+\end_inset
+
+, וממילא גם אם ההרכבה שלהן 
+\begin_inset Formula $TI$
+\end_inset
+
+ ולהסיק לגבי 
+\begin_inset Formula $CNN$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+א.
+ הוספת קבוע - אכן 
+\begin_inset Formula $TI$
+\end_inset
+
+, מתווסף קבוע ללא קשר לקלט, ולכן הוא יהיה 
+\begin_inset Formula $LTI$
+\end_inset
+
+, כלומר: 
+\begin_inset Formula $f\left(x\right)=x+r$
+\end_inset
+
+, אזי 
+\begin_inset Formula $f\left(x+a\right)\left[t\right]=f\left(x\right)\left[t+a\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+ב.
+ עבור פעולת 
+\begin_inset Formula $ReLU$
+\end_inset
+
+ נקודתית, היא איננה מושפעת ממה שנמצא סביבה, ולכן היא 
+\begin_inset Formula $TI$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+ג.
+ עבור פעולת 
+\begin_inset Formula $stride\ pooling$
+\end_inset
+
+, הוא לא 
+\begin_inset Formula $TI$
+\end_inset
+
+.
+ דוגמא נגדית: נתבונן בפילטר בגודל 
+\begin_inset Formula $1$
+\end_inset
+
+, על לוח שחמט.
+ אם מתחילים במשבצת שחורה, נקבל תמונה שחורה לחלוטין.
+ אם נתבונן במשבצת לבנה, נקבל תמונה לבנה לחלוטין.
+\end_layout
+
+\begin_layout Standard
+ד.
+ לאור הנ
+\begin_inset Quotes erd
+\end_inset
+
+ל, נוכל להסיק כי רשת 
+\begin_inset Formula $CNN$
+\end_inset
+
+ היא לא 
+\begin_inset Formula $TI$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Section
 שאלה
 \family roman

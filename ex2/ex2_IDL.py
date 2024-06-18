@@ -189,11 +189,7 @@ def train_AE(model, train_loader, test_loader, epochs, loss_func=nn.L1Loss(), de
     # print('fig saved')
     fig.show()
 
-
-if __name__ == '__main__':
-    # data
-    train_loader, test_loader = import_MNIST_dataset()
-
+def q1():
     # q1
     print('q1')
     model = AE()
@@ -233,11 +229,13 @@ if __name__ == '__main__':
     plt.tight_layout()
     plt.show()
 
+def q2():
     # q2
     print('q2')
     ae_mlp = AE_MLP(ConvAutoEncoder())
     train_classifier_encoder(ae_mlp, train_loader, test_loader, 15, save_path='./q2.png')
 
+def q3():
     # q3
     print('q3')
     encoder = ConvAutoEncoder()
@@ -279,15 +277,16 @@ if __name__ == '__main__':
     plt.tight_layout()
     plt.show()
 
+def q4():
     # q4
     print('q4')
-    mini_train_loader, mini_test_loader = import_MNIST_dataset(mini_data=True)
     model = AE()
     train_AE(model, mini_train_loader, mini_test_loader, 15, save_path='./q4_AE.png', save_mode='dont')
     print('q4_MLP')
     model2 = AE_MLP(ConvAutoEncoder())
     train_classifier_encoder(model2, mini_train_loader, mini_test_loader, 15, save_path='./q4_MLP.png')
 
+def q5():
     # q5
     print('q5')
     encoder = ConvAutoEncoder()
@@ -295,3 +294,57 @@ if __name__ == '__main__':
     pre_trained_encoder = AE_MLP(encoder)
     train_classifier_encoder(pre_trained_encoder, mini_train_loader, mini_test_loader, 15, save_model=False,
                              save_path='./q5.png')
+
+if __name__ == '__main__':
+    # data
+    train_loader, test_loader = import_MNIST_dataset()
+
+    # q1()
+    # q2()
+    # q3()
+    mini_train_loader, mini_test_loader = import_MNIST_dataset(mini_data=True)
+    # q4()
+    # q5()
+
+    # inference on AE of q1
+
+    model = AE()
+    model.load_state_dict(torch.load(AE_Q1_PATH))
+    images = []
+    for i, (x, _) in enumerate(test_loader):
+        if i == 3:
+            break
+        predict = model(x)
+        images.append(x)
+        images.append(predict)
+    images = torch.cat(images)
+    images = images.detach().cpu().numpy()
+    images = np.transpose(images, (0, 2, 3, 1))
+    images = (images + 1) / 2
+    fig, axs = plt.subplots(10, 10, figsize=(15, 15))  # Create a 10x10 grid for 50 pairs of images
+
+    for i in range(50):  # Loop over the first 50 images - todo: fix.
+        # Display the original image
+        axs[i // 5, (i % 5) * 2].imshow(images[i * 2].squeeze(), cmap='gray')
+        axs[i // 5, (i % 5) * 2].axis('off')
+        axs[i // 5, (i % 5) * 2].set_title('Original')
+
+        # Display the reconstructed image
+        axs[i // 5, (i % 5) * 2 + 1].imshow(images[i * 2 + 1].squeeze(), cmap='gray')
+        axs[i // 5, (i % 5) * 2 + 1].axis('off')
+        axs[i // 5, (i % 5) * 2 + 1].set_title('Reconstructed')
+
+    plt.tight_layout()
+    plt.show()
+    print('done')
+
+    # x, y = next(iter(train_loader))
+    # x = x[:50]
+    # predict = model(x).cpu().detach().squeeze(1)
+    # fig = px.imshow(predict, facet_col=0, facet_col_wrap=10, color_continuous_scale='gray')
+    # fig.update_layout(coloraxis_showscale=False)
+    # fig.update_xaxes(showticklabels=False)
+    # fig.update_yaxes(showticklabels=False)
+    # for i in range(50):
+    #     fig.layout.annotations[i]['text'] = str(y[i].item())
+    # fig.show()
