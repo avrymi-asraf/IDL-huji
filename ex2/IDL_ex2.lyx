@@ -396,6 +396,87 @@ today
 \noun default
 \color inherit
 1
+\family roman
+\series bold
+\shape smallcaps
+\size larger
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- 
+\begin_inset Formula $LTI$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+צ
+\begin_inset Quotes erd
+\end_inset
+
+ל שקונבולוציה היא אינווריאנטית לזמן ומרחב.
+ כלומר, 
+\begin_inset Formula $\forall x$
+\end_inset
+
+, מתקיים: 
+\begin_inset Formula $f\left[x+t\right]\left[y\right]=f\left[x\right]\left[y+t\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+הקונבולציה של 
+\begin_inset Formula $h\star g$
+\end_inset
+
+ בזמן 
+\begin_inset Formula $t$
+\end_inset
+
+ מוגדרת להיות: 
+\begin_inset Formula $\int_{-\infty}^{\infty}h\left(t-\tau\right)\left(g\left(\tau\right)\right)d\tau$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+אזי, 
+\begin_inset Formula $h\star g$
+\end_inset
+
+ בזמן 
+\begin_inset Formula $t+t_{1}$
+\end_inset
+
+ מוגדרת להיות 
+\begin_inset Formula $\int_{-\infty}^{\infty}h\left(t+t_{1}-\tau\right)\left(g\left(\tau\right)\right)d\tau$
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Section

@@ -7,10 +7,13 @@ import torch
 from torch import nn
 from tqdm import tqdm
 import plotly.express as px
+import matplotlib.pyplot as plt
 
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 ENCODER_PATH = './encoder.pth'
 ENCODER_PATH_CLASSIFIER = './encoder_classifier.pth'
+AE_Q3_PATH = './ae_q3.pth'
+AE_Q1_PATH = './ae_q1.pth'
 
 
 class ConvAutoEncoder(nn.Module):
@@ -97,6 +100,7 @@ class AE_MLP(nn.Module):
 
     def forward(self, x):
         x = self.encoder(x)
+        # todo: report no need of use of FC layer here.
         x = self.mlp(x)
         return x
 
@@ -108,7 +112,8 @@ def train_classifier_encoder(model, train_loader, test_loader, epochs, loss_func
     record_data = pd.DataFrame({"train_loss": float(), "test_loss": float(), "accuracy": float()},
                                index=range(epochs))
 
-    for epoch in range(epochs):
+    for i, epoch in enumerate(range(epochs)):
+        print(f'epoch {i}')
         train_loss = 0
         test_loss = 0
         accuracy = 0
@@ -136,7 +141,7 @@ def train_classifier_encoder(model, train_loader, test_loader, epochs, loss_func
     if save_model:
         torch.save(model.encoder.state_dict(), ENCODER_PATH_CLASSIFIER)
     fig = px.line(record_data)
-    fig.write_image(save_path)
+    # fig.write_image(save_path)
     fig.show()
 
 def train_AE(model, train_loader, test_loader, epochs, loss_func=nn.L1Loss(), device=DEVICE):
@@ -145,7 +150,8 @@ def train_AE(model, train_loader, test_loader, epochs, loss_func=nn.L1Loss(), de
 
     record_data = pd.DataFrame({"train_loss": float(), "test_loss": float()}, index=range(epochs))
 
-    for epoch in range(epochs):
+    for i, epoch in enumerate(range(epochs)):
+        print(f'epoch {i}')
         train_loss = 0
         test_loss = 0
         for x, _ in tqdm(train_loader):
@@ -167,8 +173,21 @@ def train_AE(model, train_loader, test_loader, epochs, loss_func=nn.L1Loss(), de
         test_loss /= len(test_loader)
         record_data.iloc[epoch] = [train_loss, test_loss]
 
-    torch.save(model.encoder.state_dict(), ENCODER_PATH)
-    px.line(record_data).show()
+    print('after epochs')
+    if save_mode == 'encoder':
+        torch.save(model.encoder.state_dict(), ENCODER_PATH)
+        print('encoder saved')
+        torch.save(model.state_dict(), AE_Q1_PATH)
+        print('model saved')
+    elif save_mode == 'all':
+        torch.save(model.state_dict(), AE_Q3_PATH)
+        print('model saved')
+
+    fig = px.line(record_data)
+    print('fig created')
+    # fig.write_image(save_path)
+    # print('fig saved')
+    fig.show()
 
 
 if __name__ == '__main__':
@@ -176,30 +195,103 @@ if __name__ == '__main__':
     train_loader, test_loader = import_MNIST_dataset()
 
     # q1
+    print('q1')
     model = AE()
-    train_AE(model, train_loader, test_loader, 10, save_path='./q1.png')
+    train_AE(model, train_loader, test_loader, 15, save_path='ex2/data/imgs/q1.png', save_mode='encoder')
+
+    # q1.2 show 50 images, 5x10, original and reconstructed
+    print('q1.2')
+    encoder = ConvAutoEncoder()
+    encoder.load_state_dict(torch.load(ENCODER_PATH))
+    model = AE()
+    model.encoder = encoder
+    model.eval()
+    images = []
+    for i, (x, _) in enumerate(test_loader):
+        if i == 5:
+            break
+        predict = model(x)
+        images.append(x)
+        images.append(predict)
+    images = torch.cat(images)
+    images = images.detach().cpu().numpy()
+    images = np.transpose(images, (0, 2, 3, 1))
+    images = (images + 1) / 2
+    fig, axs = plt.subplots(10, 10, figsize=(15, 15))  # Create a 10x10 grid for 50 pairs of images
+
+    for i in range(50):  # Loop over the first 50 images - todo: fix.
+        # Display the original image
+        axs[i // 5, (i % 5) * 2].imshow(images[i * 2].squeeze(), cmap='gray')
+        axs[i // 5, (i % 5) * 2].axis('off')
+        axs[i // 5, (i % 5) * 2].set_title('Original')
+
+        # Display the reconstructed image
+        axs[i // 5, (i % 5) * 2 + 1].imshow(images[i * 2 + 1].squeeze(), cmap='gray')
+        axs[i // 5, (i % 5) * 2 + 1].axis('off')
+        axs[i // 5, (i % 5) * 2 + 1].set_title('Reconstructed')
+
+    plt.tight_layout()
+    plt.show()
 
     # q2
+    print('q2')
     ae_mlp = AE_MLP(ConvAutoEncoder())
-    train_classifier_encoder(ae_mlp, train_loader, test_loader, 10, save_path='./q2.png')
+    train_classifier_encoder(ae_mlp, train_loader, test_loader, 15, save_path='./q2.png')
 
     # q3
+    print('q3')
     encoder = ConvAutoEncoder()
     encoder.load_state_dict(torch.load(ENCODER_PATH_CLASSIFIER))  # load pre-trained encoder
 
     ae_freeze = AE_freeze_encoder(encoder)
-    train_AE(ae_freeze, train_loader, test_loader, 10, save_model=False, save_path='./q3.png')
+    train_AE(ae_freeze, train_loader, test_loader, 15, save_mode='all', save_path='./q3.png')
+
+    print('q3.2')
+    encoder = ConvAutoEncoder()
+    encoder.load_state_dict(torch.load(ENCODER_PATH))
+    model = AE()
+    model.encoder = encoder
+    model.eval()
+    images = []
+    for i, (x, _) in enumerate(test_loader):
+        if i == 5:
+            break
+        predict = model(x)
+        images.append(x)
+        images.append(predict)
+    images = torch.cat(images)
+    images = images.detach().cpu().numpy()
+    images = np.transpose(images, (0, 2, 3, 1))
+    images = (images + 1) / 2
+    fig, axs = plt.subplots(10, 10, figsize=(15, 15))  # Create a 10x10 grid for 50 pairs of images
+
+    for i in range(50):  # Loop over the first 50 images - todo: fix.
+        # Display the original image
+        axs[i // 5, (i % 5) * 2].imshow(images[i * 2].squeeze(), cmap='gray')
+        axs[i // 5, (i % 5) * 2].axis('off')
+        axs[i // 5, (i % 5) * 2].set_title('Original')
+
+        # Display the reconstructed image
+        axs[i // 5, (i % 5) * 2 + 1].imshow(images[i * 2 + 1].squeeze(), cmap='gray')
+        axs[i // 5, (i % 5) * 2 + 1].axis('off')
+        axs[i // 5, (i % 5) * 2 + 1].set_title('Reconstructed')
+
+    plt.tight_layout()
+    plt.show()
 
     # q4
+    print('q4')
     mini_train_loader, mini_test_loader = import_MNIST_dataset(mini_data=True)
     model = AE()
-    train_AE(model, mini_train_loader, mini_test_loader, 20, save_path='./q4_AE.png')
+    train_AE(model, mini_train_loader, mini_test_loader, 15, save_path='./q4_AE.png', save_mode='dont')
+    print('q4_MLP')
     model2 = AE_MLP(ConvAutoEncoder())
-    train_classifier_encoder(model2, mini_train_loader, mini_test_loader, 20, save_path='./q4_MLP.png')
+    train_classifier_encoder(model2, mini_train_loader, mini_test_loader, 15, save_path='./q4_MLP.png')
 
     # q5
+    print('q5')
     encoder = ConvAutoEncoder()
     encoder.load_state_dict(torch.load(ENCODER_PATH))  # load pre-trained encoder
     pre_trained_encoder = AE_MLP(encoder)
-    train_classifier_encoder(pre_trained_encoder, mini_train_loader, mini_test_loader, 20, save_model=False,
+    train_classifier_encoder(pre_trained_encoder, mini_train_loader, mini_test_loader, 15, save_model=False,
                              save_path='./q5.png')
