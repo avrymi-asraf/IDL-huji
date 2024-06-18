@@ -463,19 +463,72 @@ today
 \end_layout
 
 \begin_layout Standard
-אזי, 
-\begin_inset Formula $h\star g$
+נתבונן על 
+\begin_inset Formula $y'\left(t\right)$
 \end_inset
 
- בזמן 
-\begin_inset Formula $t+t_{1}$
+ המוגדרת ע
+\begin_inset Quotes erd
 \end_inset
 
- מוגדרת להיות 
-\begin_inset Formula $\int_{-\infty}^{\infty}h\left(t+t_{1}-\tau\right)\left(g\left(\tau\right)\right)d\tau$
+י
+\begin_inset Formula 
+\[
+y'\left(t\right)=h\left(t+t_{0}\right)\star g\left(t\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+מתקיים
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+y'\left(t\right)= & \int_{-\infty}^{\infty}h\left(t_{0}+\tau\right)g\left(t-\tau\right)d\tau
+\end{align*}
+
+\end_inset
+
+ נסמן 
+\begin_inset Formula $\tau'=\tau+t_{0}$
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+נשים לב כי 
+\begin_inset Formula $d\tau=d\tau'$
+\end_inset
+
+ כי 
+\begin_inset Formula $t_{0}$
+\end_inset
+
+ קבוע.
+\end_layout
+
+\begin_layout Standard
+אזי מתקיים
+\begin_inset Formula 
+\begin{align*}
+= & \int_{-\infty}^{\infty}h\left(\tau'\right)g\left(t-\tau'+t_{0}\right)d\tau'\\
+= & \int_{-\infty}^{\infty}h\left(\tau'\right)g\left(\left(t+t_{0}\right)-\tau'\right)d\tau'\\
+= & y\left(t+t_{0}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כנדרש.
  
 \end_layout
 
