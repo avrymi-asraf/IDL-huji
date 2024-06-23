@@ -100,7 +100,6 @@ class AE_MLP(nn.Module):
 
     def forward(self, x):
         x = self.encoder(x)
-        # todo: report no need of use of FC layer here.
         x = self.mlp(x)
         return x
 

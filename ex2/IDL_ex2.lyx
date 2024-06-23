@@ -645,11 +645,25 @@ y'\left(t\right)= & \int_{-\infty}^{\infty}h\left(t_{0}+\tau\right)g\left(t-\tau
 \begin_inset Formula $CNN$
 \end_inset
 
- היא לא 
+ היא לא בהכרח 
 \begin_inset Formula $TI$
 \end_inset
 
 .
+ אמנם, 
+\begin_inset Formula $pooling$
+\end_inset
+
+ תורם לאינווריאנטיות בכך שהמיקום המדוייק של תופעות נעשה פחות חשוב, אולם
+ קיימים מקרי קצה שבהם לא יתקיים כי 
+\begin_inset Formula $CNN$
+\end_inset
+
+ הוא 
+\begin_inset Formula $TI$
+\end_inset
+
+, כפי שהצגנו בסעיף ג'.
 \end_layout
 
 \begin_layout Section
@@ -684,6 +698,32 @@ y'\left(t\right)= & \int_{-\infty}^{\infty}h\left(t_{0}+\tau\right)g\left(t-\tau
 \end_layout
 
 \begin_layout Standard
+א.
+ הוספת בייאס, הפונק' היא 
+\begin_inset Formula $f\left(x\right)=x+c$
+\end_inset
+
+, ולכן 
+\begin_inset Formula $f'\left(x\right)=1$
+\end_inset
+
+.
+ לכן נקבל כי מטריצת היעקוביאן היא מטריצת הזהות.
+\end_layout
+
+\begin_layout Standard
+ב.
+ בכפל מטריצות, 
+\color red
+אבריימי יכתוב
+\end_layout
+
+\begin_layout Standard
+ג.
+ שכבת קונבולוציה
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage pagebreak
 \end_inset
 
@@ -696,12 +736,12 @@ y'\left(t\right)= & \int_{-\infty}^{\infty}h\left(t_{0}+\tau\right)g\left(t-\tau
 חלק מעשי
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection
 
 \numeric on
 1
 \numeric off
-(
+.
 \end_layout
 
 \begin_layout Standard
@@ -945,6 +985,343 @@ y'\left(t\right)= & \int_{-\infty}^{\infty}h\left(t_{0}+\tau\right)g\left(t-\tau
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+לא מצאנו שיש צורך להוסיף שכבה 
+\begin_inset Formula $FC$
+\end_inset
+
+ נוספת בין ה
+\begin_inset Formula $encider$
+\end_inset
+
+ ל
+\begin_inset Formula $decoder$
+\end_inset
+
+, והתוצאות שקיבלנו היו טובות גם בלעדיו.
+ היות שהדאטה סט הוא קל ללמידה, העדפנו מודל מוגבל יותר, כדי להימנע מ
+\begin_inset Formula $over\ fitting$
+\end_inset
+
+ בהמשך.
+\end_layout
+
+\begin_layout Standard
+גרף של אימון ה
+\begin_inset Formula $AE$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename q1_ex2_idl.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ניתן לראות כי המודל מתאמן מהר יחסית, ומגיע לתוצאות טובות כבר אחרי 
+\begin_inset Formula $3$
+\end_inset
+
+ אפוקים, ואחרי 
+\begin_inset Formula $6$
+\end_inset
+
+ אפוקים הוא מגיע לרמת דיוק טובה.
+\end_layout
+
+\begin_layout Subsubsection
+
+\numeric on
+2
+\numeric off
+.
+\end_layout
+
+\begin_layout Standard
+בשאלה זו אימנו מודל 
+\begin_inset Formula $MLP$
+\end_inset
+
+ על גבי 
+\begin_inset Formula $Encoder$
+\end_inset
+
+ מארכיטקטורה זהה לזו שתוארה בסעיף הקודם )אך האימון התרחש במקביל, כלומר המשקולות
+ של ה
+\begin_inset Formula $Encoder$
+\end_inset
+
+ אותחלו בצורה אקראית(.
+\end_layout
+
+\begin_layout Standard
+הגודל שבחרנו לשכבה הפנימית של ה
+\begin_inset Formula $MLP$
+\end_inset
+
+ הוא 
+\begin_inset Formula $50$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+נתבונן בגרף הלמידה של המודל:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename q2_ex2_idl.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ניתן לראות כי כבר אחרי אפוק בודד, המודל למד את הדאטה בצורה טובה יחסית, ובסופו
+ של דבר המודל מצליח במידת וודאות של למעלה מ
+\begin_inset Formula $95\%$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+
+\numeric on
+3
+\numeric off
+.
+\end_layout
+
+\begin_layout Standard
+בסעיף זה, השתמשנו רק ב
+\begin_inset Formula $encoder$
+\end_inset
+
+ שאומן בסעיף הקודם, והצמדנו לו 
+\begin_inset Formula $decoder$
+\end_inset
+
+ מהסוג שתואר בסעיף א'.
+ אימנו את המודל על הדאטה סט.
+ נתבונן בגרף תהליך האימון:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename q3_ex2_idl.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ניתן לראות כי ה
+\begin_inset Formula $loss$
+\end_inset
+
+ נמוך יותר במודל זה, אך ככלל הלמידה נראית דומה מאוד.
+\end_layout
+
+\begin_layout Standard
+
+\color red
+נשווה בין התמונות שהמודל של סעיף זה מייצר, בהשוואה למודל של סעיף א'.
+\end_layout
+
+\begin_layout Subsubsection
+
+\numeric on
+4
+\numeric off
+.
+\end_layout
+
+\begin_layout Standard
+בסעיף זה, אימנו את המודלים שתוארו בסעיפים הקודמים על חלק קטן בהרבה מהדאטה
+ סט )
+\begin_inset Formula $100$
+\end_inset
+
+ דוגמאות בלבד(, אולם הטסט-סט נשאר זהה.
+ נתבונן בתהליך הלמידה של המודלים:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename q4_ex2_idl_AE.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+בגרף של 
+\begin_inset Formula $AE$
+\end_inset
+
+ על סט אימון קטן, ניתן לראות שהמודל הצליח ללמוד את המשימה, אולם לקח לו הרבה
+ יותר אפוקים להגיע להתכנסות.
+ אחרי 
+\begin_inset Formula $9$
+\end_inset
+
+ אפוקים מתרחשת גם התופעה של 
+\begin_inset Formula $over\ fitting$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+נתבונן גם על הגרף של 
+\begin_inset Formula $Encoder-MLP$
+\end_inset
+
+ על סט אימון קטן:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename q4_ex2_idl_MLP.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ניתן לראות שהמודל מתקשה בלמידת המשימה, ה
+\begin_inset Formula $loss$
+\end_inset
+
+ נשאר גבוה יחסית, ואמנם יש למידה איטית, אך גם אחרי 
+\begin_inset Formula $20$
+\end_inset
+
+ אפוקים - התוצאות אינן משביעות רצון.
+\end_layout
+
+\begin_layout Subsubsection
+
+\numeric on
+5
+\numeric off
+.
+\end_layout
+
+\begin_layout Standard
+בסעיף זה, השתמשנו ב
+\begin_inset Formula $encoder$
+\end_inset
+
+ שאומן בסעיף
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $1$
+\end_inset
+
+, ועליו הוספנו ראש 
+\begin_inset Formula $MLP$
+\end_inset
+
+ שאותחל באופן אקראי.
+ את המודל אימנו על דאטה סט קטן של 
+\begin_inset Formula $100$
+\end_inset
+
+ תמונות, כמו בסעיף הקודם.
+ נתבונן בהליך הלמידה:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename q5_ex2_idl.png
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ניתן לראות כי אמנם התרחש 
+\begin_inset Formula $over\ fit$
+\end_inset
+
+ לדאטה, אך התרחשה למידה, והיא קרתה בקצב מהיר בהרבה לעומת הסעיף הקודם, וגם
+ ה
+\begin_inset Formula $loss$
+\end_inset
+
+ משמעותית יותר קטן, וה
+\begin_inset Formula $accuracy$
+\end_inset
+
+ הרבה יותר גדול.
+\end_layout
+
+\begin_layout Standard
+הגרפים של מודל זה, יחד עם הגרף השני של הסעיף הקודם, מראים את התועלת הגדולה
+ של 
+\begin_inset Formula $pre\ training$
+\end_inset
+
+ על דאטה לא מתויג, שהוביל לתוצאות טובות הרבה יותר, למרות ששני המודלים התאמנו
+ על אותו דאטה סט מתויג קטן.
+\end_layout
+
+\begin_layout Standard
+לשני המודלים היה את אותו הדאטה, אולם בגלל שהמודל השני השתמש בטכניקת ה
+\begin_inset Formula $pre\ training$
+\end_inset
+
+, מבלי לדעת שום דבר נוסף על הדאטה, וכאשר ה
+\begin_inset Formula $encoder$
+\end_inset
+
+ מאומן בכלל על משימה אחרת לגמרי מזו שהמודלים נדרשו אליה בסעיף זה - המודל
+ שעבר את ה
+\begin_inset Formula $pre\ training$
+\end_inset
+
+ הצליח במשימה שלו הרבה יותר, מכיוון שהוא למד את הדאטה על משימה אחרת, ובעקיפין
+ גם למד להבחין במאפיינים חשובים של הדאטה, שהיו רלוונטיים גם למשימה של סעיף
+ זה.
+ בכך, הדגמנו את הכוח של טכניקת ה
+\begin_inset Formula $pre\ training$
+\end_inset
+
+ עליה למדנו בכיתה.
 \end_layout
 
 \end_body
