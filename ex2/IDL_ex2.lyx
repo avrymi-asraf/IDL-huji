@@ -684,6 +684,131 @@ y'\left(t\right)= & \int_{-\infty}^{\infty}h\left(t_{0}+\tau\right)g\left(t-\tau
 \end_layout
 
 \begin_layout Standard
+לפי הגדרה, אם 
+\begin_inset Formula $f:\mathbb{R}^{n}\to\mathbb{R}^{m}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+J_{f}=\begin{array}{c}
+\Delta f_{1}\\
+\Delta f_{2}\\
+\vdots\\
+\Delta f_{m}
+\end{array}=\begin{array}{cccc}
+\frac{\partial f_{1}}{\partial x_{1}} & \frac{\partial f_{1}}{\partial x_{2}} & \cdots & \frac{\partial f_{1}}{\partial x_{n}}\\
+\frac{\partial f_{2}}{\partial x_{1}} & \frac{\partial f_{2}}{\partial x_{2}} & \cdots & \frac{\partial f_{2}}{\partial x_{n}}\\
+\vdots & \vdots & \ddots & \vdots\\
+\frac{\partial f_{m}}{\partial x_{1}} & \frac{\partial f_{m}}{\partial x_{2}} & \cdots & \frac{\partial f_{m}}{\partial x_{n}}
+\end{array}
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+נחשב לפי זה:
+\end_layout
+
+\begin_layout Subsubsection*
+חיבור
+\end_layout
+
+\begin_layout Standard
+עבור 
+\begin_inset Formula $f\left(x\right)=x+b$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+J_{f}=\begin{array}{cccc}
+\frac{\partial f_{1}}{\partial x_{1}} & 0 & \cdots & 0\\
+0 & \frac{\partial f_{2}}{\partial x_{2}} & \cdots & 0\\
+\vdots & \vdots & \ddots & \vdots\\
+0 & 0 & \cdots & \frac{\partial f_{m}}{\partial x_{n}}
+\end{array}=\begin{array}{cccc}
+1 & 0 & \cdots & 0\\
+0 & 1 & \cdots & 0\\
+\vdots & \vdots & \ddots & \vdots\\
+0 & 0 & \cdots & 1
+\end{array}=I_{n}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+כפל מטריצות 
+\end_layout
+
+\begin_layout Standard
+עבור 
+\begin_inset Formula $f\left(x\right)=Wx$
+\end_inset
+
+ כך ש
+\begin_inset Formula $W\in M_{m\times n}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+J_{f}=\begin{array}{cccc}
+\frac{\partial f_{1}}{\partial x_{1}} & \frac{\partial f_{1}}{\partial x_{2}} & \cdots & \frac{\partial f_{1}}{\partial x_{n}}\\
+\frac{\partial f_{2}}{\partial x_{1}} & \frac{\partial f_{2}}{\partial x_{2}} & \cdots & \frac{\partial f_{2}}{\partial x_{n}}\\
+\vdots & \vdots & \ddots & \vdots\\
+\frac{\partial f_{m}}{\partial x_{1}} & \frac{\partial f_{m}}{\partial x_{2}} & \cdots & \frac{\partial f_{m}}{\partial x_{n}}
+\end{array}=\begin{array}{cccc}
+w_{11} & w_{21} & \cdots & w_{n1}\\
+w_{21} & w_{22} & \cdots & w_{n2}\\
+\vdots & \vdots & \ddots & \vdots\\
+w_{m1} & w_{m2} & \cdots & w_{mn}
+\end{array}
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+שכבת קונבלוציה
+\end_layout
+
+\begin_layout Standard
+עבור 
+\begin_inset Formula $f\left(x\right)=h*x$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+J_{f}=\begin{array}{c}
+\Delta\sum_{\tau}\left(x_{1+\tau}\right)\left(h_{n-\tau}\right)\\
+\Delta f_{2}\\
+\vdots\\
+\Delta f_{m}
+\end{array}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage pagebreak
 \end_inset
 
@@ -788,7 +913,7 @@ y'\left(t\right)= & \int_{-\infty}^{\infty}h\left(t_{0}+\tau\right)g\left(t-\tau
 \begin_inset Formula $tanh$
 \end_inset
 
-.
+.ִ
 \end_layout
 
 \begin_layout Standard
