@@ -1104,7 +1104,7 @@ w_{m1} & w_{m2} & \cdots & w_{mn}
 \begin_layout Standard
 \begin_inset Graphics
 	filename q1_ex2_idl.png
-	scale 70
+	scale 35
 
 \end_inset
 
@@ -1167,7 +1167,7 @@ w_{m1} & w_{m2} & \cdots & w_{mn}
 \begin_layout Standard
 \begin_inset Graphics
 	filename q2_ex2_idl.png
-	scale 70
+	scale 35
 
 \end_inset
 
@@ -1208,7 +1208,7 @@ w_{m1} & w_{m2} & \cdots & w_{mn}
 \begin_layout Standard
 \begin_inset Graphics
 	filename q3_ex2_idl.png
-	scale 70
+	scale 35
 
 \end_inset
 
@@ -1224,9 +1224,180 @@ w_{m1} & w_{m2} & \cdots & w_{mn}
 \end_layout
 
 \begin_layout Standard
+כעת, נבקש להתבונן ב
+\begin_inset Formula $50$
+\end_inset
 
-\color red
-נשווה בין התמונות שהמודל של סעיף זה מייצר, בהשוואה למודל של סעיף א'.
+ תמונות מקור ותמונות מג'ונרטות, מכל אחד מהמודלים - המודל של שאלה 
+\begin_inset Formula $1$
+\end_inset
+
+, שהמשימה שלו היתה לג'נרט בחזרה את התמונות שהוא קיבל, והמודל של שאלה
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $3$
+\end_inset
+
+, שה
+\begin_inset Formula $encoder$
+\end_inset
+
+ שלו אומן עם 
+\begin_inset Formula $MLP$
+\end_inset
+
+ במשימת קלאסיפיקציה של התמונות, והוצמד לו 
+\begin_inset Formula $decoder$
+\end_inset
+
+ שאומן על משימת ג'ינרוט התמונות מחדש, כאשר המשקולות של ה
+\begin_inset Formula $encoder$
+\end_inset
+
+ היו קפואות לאורך אימון המודל.
+\end_layout
+
+\begin_layout Standard
+ראשית, נתבונן בתוצאות של המודל משאלה 
+\begin_inset Formula $1$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename 50_img_AE_q1.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+וכן בתוצאות של המודל משאלה 
+\begin_inset Formula $3$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename 50_img_AE_q3.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ניתן לראות שיש תמונות שהיו קלות יותר ללמידה עבור שני המודלים, ויש תמונות
+ שבהם שני המודלים התקשו ללמוד את התמונה המקורית.
+ בשני המודלים, ה
+\begin_inset Formula $edcoder$
+\end_inset
+
+ צמצם את הדאטה מ
+\begin_inset Formula $28\cdot28$
+\end_inset
+
+ לווקטור מצומצם בעל 
+\begin_inset Formula $12$
+\end_inset
+
+ כניסות בלבד.
+ 
+\end_layout
+
+\begin_layout Standard
+בהתרשמות כללית, המודל של שאלה 
+\begin_inset Formula $1$
+\end_inset
+
+ הצליח טוב יותר במשימה לעומת המודל של שאלה 
+\begin_inset Formula $3$
+\end_inset
+
+, מה שלא אמור להפתיע אותנו - הוא אומן ספציפית למשימה הזו, וגם המשקולות של
+ ה
+\begin_inset Formula $encoder$
+\end_inset
+
+ שלו אומנו למשימה הזו - כאשר המטרה שלהם היתה להביא למינימום את ה
+\begin_inset Formula $loss$
+\end_inset
+
+ שמקביל להתבוננות שלנו על ההבדלים בין התמונות שאנחנו רואים כאן.
+ ניתן לראות אם כן שה
+\begin_inset Formula $embedding$
+\end_inset
+
+ שה
+\begin_inset Formula $encoder$
+\end_inset
+
+ עשה בשתי המשימות השונות שלו, הוא שונה, ולכן השפיע גם על היכולת של ה
+\begin_inset Formula $decoder$
+\end_inset
+
+ ללמוד בכל זאת.
+\end_layout
+
+\begin_layout Standard
+אמנם, אם נתבונן בצורה מעמיקה יותר, נוכל לראות כי יש הבדלים בין הפלטים של
+ המודלים השונים.
+ מודל 
+\begin_inset Formula $3$
+\end_inset
+
+, שבו ה
+\begin_inset Formula $encoder$
+\end_inset
+
+ אומן במשימה של הבחנה בין הספרות השונות, נראה כי בתוך כל קלאס, הספרות דומות
+ יותר בצורתן זו לזו.
+ כך למשל, הספרה 
+\begin_inset Formula $4$
+\end_inset
+
+, שניתנה במגוון רחב יחסית של צורות שונות לכתוב אותה - המודל התקשה לשחזר
+ אותה בצורה טובה, ואולי ניתן לומר שיש כאן סוג של 'מיצוע' בין האופנים השונים
+ לכתוב את הספרה 
+\begin_inset Formula $4$
+\end_inset
+
+, שפגע ביכולת של ה
+\begin_inset Formula $decoder$
+\end_inset
+
+ לפענח אותה בצורה טובה.
+\end_layout
+
+\begin_layout Standard
+לעומת זאת, במודל 
+\begin_inset Formula $1$
+\end_inset
+
+, נראה שיש הבדל גדול יותר בין הצורות השונות של הספרה 
+\begin_inset Formula $4$
+\end_inset
+
+ שג'ונרטו, והן דומות יותר לתמונת המקור שלהן - היות שהמודל היה עיוור לחלוטין
+ לתגית של הספרה, והתייחס לקלט כאל תמונה בלבד.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1250,7 +1421,7 @@ w_{m1} & w_{m2} & \cdots & w_{mn}
 \begin_layout Standard
 \begin_inset Graphics
 	filename q4_ex2_idl_AE.png
-	scale 70
+	scale 35
 
 \end_inset
 
@@ -1286,7 +1457,7 @@ w_{m1} & w_{m2} & \cdots & w_{mn}
 \begin_layout Standard
 \begin_inset Graphics
 	filename q4_ex2_idl_MLP.png
-	scale 70
+	scale 35
 
 \end_inset
 
@@ -1351,7 +1522,7 @@ w_{m1} & w_{m2} & \cdots & w_{mn}
 \begin_layout Standard
 \begin_inset Graphics
 	filename q5_ex2_idl.png
-	scale 70
+	scale 35
 
 \end_inset
 
