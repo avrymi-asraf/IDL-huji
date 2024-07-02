@@ -303,7 +303,7 @@ if __name__ == '__main__':
     # q3()
     mini_train_loader, mini_test_loader = import_MNIST_dataset(mini_data=True)
     # q4()
-    # q5()
+    q5()
 
     # inference on AE of q1
 
