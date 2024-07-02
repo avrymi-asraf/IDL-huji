@@ -1,4 +1,5 @@
 # IDL EX2 Hillel Avreimi
+import cv2
 import pandas as pd
 import time
 from utiltis import import_MNIST_dataset
@@ -188,6 +189,17 @@ def train_AE(model, train_loader, test_loader, epochs, loss_func=nn.L1Loss(), de
     # print('fig saved')
     fig.show()
 
+def plot_AE_img(img, outputs):
+    for i in range(100):
+        ax = plt.subplot(10,10,i+1)
+        im1 = (img[i][0].numpy()*255).astype(float)
+        im2 = (outputs[i][0].detach().numpy()*255).astype(float)
+        im = cv2.hconcat([im1,im2])
+        plt.imshow(im,cmap='Greys')
+        ax.get_xaxis().set_visible(False)
+        ax.get_yaxis().set_visible(False)
+    plt.show()
+
 def q1():
     # q1
     print('q1')
@@ -243,38 +255,22 @@ def q3():
     ae_freeze = AE_freeze_encoder(encoder)
     train_AE(ae_freeze, train_loader, test_loader, 15, save_mode='all', save_path='./q3.png')
 
+def q3_2():
     print('q3.2')
-    encoder = ConvAutoEncoder()
-    encoder.load_state_dict(torch.load(ENCODER_PATH))
-    model = AE()
-    model.encoder = encoder
-    model.eval()
-    images = []
-    for i, (x, _) in enumerate(test_loader):
-        if i == 5:
-            break
-        predict = model(x)
-        images.append(x)
-        images.append(predict)
-    images = torch.cat(images)
-    images = images.detach().cpu().numpy()
-    images = np.transpose(images, (0, 2, 3, 1))
-    images = (images + 1) / 2
-    fig, axs = plt.subplots(10, 10, figsize=(15, 15))  # Create a 10x10 grid for 50 pairs of images
+    model_q3 = AE()
+    model_q3.load_state_dict(torch.load(AE_Q3_PATH))
+    model_q3.eval()
+    images_q3 = torch.stack([mini_train_loader.dataset[i][0] for i in range(100)])
+    outputs_q3 = model_q3(images_q3)
+    plot_AE_img(images_q3, outputs_q3)
 
-    for i in range(50):  # Loop over the first 50 images - todo: fix.
-        # Display the original image
-        axs[i // 5, (i % 5) * 2].imshow(images[i * 2].squeeze(), cmap='gray')
-        axs[i // 5, (i % 5) * 2].axis('off')
-        axs[i // 5, (i % 5) * 2].set_title('Original')
-
-        # Display the reconstructed image
-        axs[i // 5, (i % 5) * 2 + 1].imshow(images[i * 2 + 1].squeeze(), cmap='gray')
-        axs[i // 5, (i % 5) * 2 + 1].axis('off')
-        axs[i // 5, (i % 5) * 2 + 1].set_title('Reconstructed')
-
-    plt.tight_layout()
-    plt.show()
+    # inference on AE of q1
+    model_q1 = AE()
+    model_q1.load_state_dict(torch.load(AE_Q1_PATH))
+    model_q1.eval()
+    images = torch.stack([mini_train_loader.dataset[i][0] for i in range(100)])
+    outputs = model_q1(images)
+    plot_AE_img(images, outputs)
 
 def q4():
     # q4
@@ -297,53 +293,18 @@ def q5():
 if __name__ == '__main__':
     # data
     train_loader, test_loader = import_MNIST_dataset()
+    mini_train_loader, mini_test_loader = import_MNIST_dataset(mini_data=True)
 
     # q1()
     # q2()
     # q3()
-    mini_train_loader, mini_test_loader = import_MNIST_dataset(mini_data=True)
+    q3_2()
     # q4()
     q5()
 
-    # inference on AE of q1
 
-    model = AE()
-    model.load_state_dict(torch.load(AE_Q1_PATH))
-    images = []
-    for i, (x, _) in enumerate(test_loader):
-        if i == 3:
-            break
-        predict = model(x)
-        images.append(x)
-        images.append(predict)
-    images = torch.cat(images)
-    images = images.detach().cpu().numpy()
-    images = np.transpose(images, (0, 2, 3, 1))
-    images = (images + 1) / 2
-    fig, axs = plt.subplots(10, 10, figsize=(15, 15))  # Create a 10x10 grid for 50 pairs of images
 
-    for i in range(50):  # Loop over the first 50 images - todo: fix.
-        # Display the original image
-        axs[i // 5, (i % 5) * 2].imshow(images[i * 2].squeeze(), cmap='gray')
-        axs[i // 5, (i % 5) * 2].axis('off')
-        axs[i // 5, (i % 5) * 2].set_title('Original')
 
-        # Display the reconstructed image
-        axs[i // 5, (i % 5) * 2 + 1].imshow(images[i * 2 + 1].squeeze(), cmap='gray')
-        axs[i // 5, (i % 5) * 2 + 1].axis('off')
-        axs[i // 5, (i % 5) * 2 + 1].set_title('Reconstructed')
 
-    plt.tight_layout()
-    plt.show()
-    print('done')
 
-    # x, y = next(iter(train_loader))
-    # x = x[:50]
-    # predict = model(x).cpu().detach().squeeze(1)
-    # fig = px.imshow(predict, facet_col=0, facet_col_wrap=10, color_continuous_scale='gray')
-    # fig.update_layout(coloraxis_showscale=False)
-    # fig.update_xaxes(showticklabels=False)
-    # fig.update_yaxes(showticklabels=False)
-    # for i in range(50):
-    #     fig.layout.annotations[i]['text'] = str(y[i].item())
-    # fig.show()
+
