@@ -396,33 +396,171 @@ today
 \noun default
 \color inherit
 1
-\family roman
-\series bold
-\shape smallcaps
-\size larger
-\emph off
-\numeric off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
+\end_layout
+
+\begin_layout Standard
+עבור כל אחת מהמשימות הבאות, נציין וננמק באיזו ארכיטקטורה נבחר כדי לממש רשת
+ שתפתור את הבעיה בצורה מיטבית:
+\end_layout
+
+\begin_layout Standard
+א.
  
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-- 
+\begin_inset Formula $Speach\ to\ Text$
+\end_inset
+
+ - 
+\begin_inset Formula $many\ to\ many\ CNN$
+\end_inset
+
+.
+ הסיבה היא שמדובר בדאטה שהוא 
+\begin_inset Formula $LTI$
+\end_inset
+
+, ולכן רשת קונבולוציה תהיה המתאימה ביותר.
+ הסוג יהיה 
+\begin_inset Formula $many\ to\ many$
+\end_inset
+
+ היות שהאינפוט מורכב מסיגנלים רבים )ולא יהיה נכון למצע אותם בצורה כזו או
+ אחרת, יש חשיבות להפרדה שלהם(, וגם הפלט המבוקש הוא סדרה של טוקנים/מילים
+ רבות.
+\end_layout
+
+\begin_layout Standard
+בנוסף, 
+\begin_inset Formula $CNN$
+\end_inset
+
+ מאפשר לרוץ בצורה מקבילית, ולכן על אף שהיה ניתן לחשוב להשתמש ב
+\begin_inset Formula $RNN$
+\end_inset
+
+ היות שהמשימה היא 
+\begin_inset Formula $seq2seq$
+\end_inset
+
+, תכונת ה
+\begin_inset Formula $LTI$
+\end_inset
+
+ של הדאטה, ותכונת המקביליות של ה
+\begin_inset Formula $CNN$
+\end_inset
+
+ גורמות לנו להעדיף את ה
+\begin_inset Formula $CNN$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+ב.
+ 
+\begin_inset Formula $QA$
+\end_inset
+
+ - אם מדובר על ג'ינרוט של טקסט, אזי הטרספורמר הוא הארכיטקטורה המוצלחת והנפוצה
+ ביותר כיום, ולכן נבחר להשתמש בה )אם יש לנו מגבלות תקציב, ייתכן שנעדיף להשתמש
+ במודל 
+\begin_inset Formula $fine\ tuning$
+\end_inset
+
+, אולי אפילו עם 
+\begin_inset Formula $LoRA$
+\end_inset
+
+ וכד' כדי להצליח לאמן את המודל בצורה יעילה גם עם משאבים דלים(.
+\end_layout
+
+\begin_layout Standard
+ג.
+ 
+\begin_inset Formula $Sentiment\ Analysis$
+\end_inset
+
+ - 
+\begin_inset Formula $many\ to\ one\ RNN$
+\end_inset
+
+ יהיה מודל מוצלח כאן.
+ המטרה היא לנתח את הטקסט כולו, כרצף, ולסווג אותו ל
+\begin_inset Formula $pos,neg,natural$
+\end_inset
+
+ - לכן הפלט יהיה בודד.
+ יש כאן חשיבות לרצף של המילים, לסדר הפנימי שלהן, ולמיקום שלהן בתוך המשפט,
+ כלומר תכונת ה
+\begin_inset Formula $LTI$
+\end_inset
+
+ לא מתקיימת, ולכן לא מתאים להשתמש כאן ב
+\begin_inset Formula $CNN$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+ד.
+ 
+\begin_inset Formula $Image\ classification$
+\end_inset
+
+ - 
+\begin_inset Formula $many\ to\ one\ CNN$
+\end_inset
+
+.
+ תכונת ה
+\begin_inset Formula $LTI$
+\end_inset
+
+ חשובה בסיווג של תמונות, וכן נרצה שהקלט של הרשת יהיה מרובה, כדי להכיל את
+ כל הפיקסלים.
+ נרצה שהפלט של הרשת יהיה בודד - התגית הרלוונטית של התמונה.
+\end_layout
+
+\begin_layout Standard
+ה.
+ 
+\begin_inset Formula $Single\ word\ translation$
+\end_inset
+
+ - 
+\begin_inset Formula $FFN$
+\end_inset
+
+ פשוט יהיה מספיק.
+ אפשר לאמן אותו ע
+\begin_inset Quotes erd
+\end_inset
+
+י זוגות של מילים אחד מכל שפה, ולראות שהוא לומד איך לסווג את המילים נכון.
+ תחת ההנחה שה
+\begin_inset Formula $train$
+\end_inset
+
+ לא יכיל את כל ה
+\begin_inset Formula $test$
+\end_inset
+
+, ניתן להשתמש בשיטת ה
+\begin_inset Formula $AE$
+\end_inset
+
+ אותה תרגלנו בתרגיל הבית הקודם, כאשר אנחנו מניחים שהמימד הלטנטי יצליח ללמוד
+ את המהות של המילים כ
+\begin_inset Formula $embedding$
+\end_inset
+
+, וכך ה
+\begin_inset Formula $decoder$
+\end_inset
+
+ יפענח אותן בצורה הטובה ביותר לשפה השניה.
 \end_layout
 
 \begin_layout Section
@@ -456,6 +594,239 @@ today
 2
 \numeric off
  
+\end_layout
+
+\begin_layout Subsubsection
+א.
+\end_layout
+
+\begin_layout Standard
+נבנה ארכיטרטורה לרשת שמקבלת משפט של טקסט, ומחזירה תמונה מתאימה.
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+1
+\numeric off
+.
+ 
+\begin_inset Formula $text\ encoder$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ראשית, נשתמש ב
+\begin_inset Formula $encoder$
+\end_inset
+
+ של 
+\begin_inset Formula $transformer$
+\end_inset
+
+ כדי ליצור ווקטור לטנטי המייצג את המשפט, באופן שבו ה
+\begin_inset Formula $embedding$
+\end_inset
+
+ מחזיק את המידע הרלוונטי מהמשפט לצורך הייצוג של התמונה.
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+2
+\numeric off
+.
+ 
+\begin_inset Formula $MLP$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כעת, בעזרת רשת 
+\begin_inset Formula $MLP$
+\end_inset
+
+ )בעלת מספר שכבות, נאמר
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+2
+\numeric off
+(, נמפה את ה
+\begin_inset Formula $embedding$
+\end_inset
+
+ של המשפטים אל 
+\begin_inset Formula $embedding$
+\end_inset
+
+ אחר של התמונות.
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+3
+\numeric off
+.
+ 
+\begin_inset Formula $image\ decoder$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+נשתמש ברשת 
+\begin_inset Formula $CNN$
+\end_inset
+
+ כ
+\begin_inset Formula $decoder$
+\end_inset
+
+, כדי להפוך 
+\begin_inset Formula $embedding$
+\end_inset
+
+ של תמונה במרחב הלטנטי של התמונות, למטריצה דו-מימדית של פיקסלים, עם הערוצים
+ הרלוונטיים, ולייצר תמונת פלט שלמה.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+נשים לב שהארכיטקטורה מסוגלת לבצע את המשימה היות שה
+\begin_inset Formula $encoder$
+\end_inset
+
+ תופס את המהות של המשפט, ה
+\begin_inset Formula $MLP$
+\end_inset
+
+ מחבר בין המשפט בייצוג הלטנטי שלו לתמונה בייצוג הלטנטי שלה, וה
+\begin_inset Formula $decoder$
+\end_inset
+
+ מפענח תמונה מהיצוג הלטנטי לייצוג הפלט הנדרש.
+\end_layout
+
+\begin_layout Subsubsection
+ב.
+\end_layout
+
+\begin_layout Standard
+על מנת שהרשת תתמוך בחלוקת התמונה ל
+\begin_inset Formula $4$
+\end_inset
+
+ תתי-תמונות, וכך נוכל להחזיר תמונה מדוייקת יותר לטקסט הנתון, הארכיטקטורה
+ תהיה דומה יחסית, אך נוסיף שכבת 
+\begin_inset Formula $attention$
+\end_inset
+
+ בין כל אחת מהמילים של הקלט, לבין כל אחד מ
+\begin_inset Formula $4$
+\end_inset
+
+ הייצוגים )כלומר, האימון של ה
+\begin_inset Formula $attention$
+\end_inset
+
+ ייעשה בנפרד עבור כל אחד מהרבעים של התמונה, ובכך הייצוג הנלמד של הטקסט יהיה
+ כזה שמתייחס בצורה ספציפית יותר לאותו רבע של התמונה(.
+ כך, הייצוג הלטנטי של המשפט, בכל אחד מארבעת הייצוגים המייצגים רבע אחר של
+ התמונה, יהיה כזה שנותן משקל שונה למילים השונות במשפט, ועל אף שמדובר באותו
+ המשפט כקלט, שכבת ה
+\begin_inset Formula $attention$
+\end_inset
+
+ תגרום לכך שהייצוג הלטנטי יהיה אחר - מדוייק יותר עבור אותו הרבע הרלוונטי.
+\end_layout
+
+\begin_layout Standard
+כעת, באופן נפרד )ומקביל(, כל אחד מארבעת הייצוגים הלטנטיים ימופה לייצוג לטנטי
+ של תת-תמונה, וה
+\begin_inset Formula $decoder$
+\end_inset
+
+ יפענח את הייצוג לתת-תמונה.
+\end_layout
+
+\begin_layout Standard
+לבסוף, נדביק את
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $4$
+\end_inset
+
+ הרבעים בסדר הנכון, ונוציא תמונה כפלט.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+שכבת ה
+\begin_inset Formula $attention$
+\end_inset
+
+ תוכל להראות לנו אילו מילים משפיעות במיוחד על כל רבע תמונה במשפט.
 \end_layout
 
 \begin_layout Section
@@ -508,6 +879,171 @@ today
 1
 \numeric off
 .
+\end_layout
+
+\begin_layout Standard
+
+\color red
+לא מצליח לשחזר את זה עדיין על מימד פנימי של 
+\begin_inset Formula $64$
+\end_inset
+
+, הקוד התחרבש.
+ אם נצליח לתקן אותו, אני צופה שיצא משהו דומה, מבחינתי מקסימום לבקש ממישהו
+ את ה
+\begin_inset Formula $pth$
+\end_inset
+
+ שלהם עבור 
+\begin_inset Formula $64$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+נשווה בין התוצאות של ה
+\begin_inset Formula $RNN$
+\end_inset
+
+ ושל ה
+\begin_inset Formula $GRU$
+\end_inset
+
+, עבור מימד פנימי של 
+\begin_inset Formula $128$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename RNN_128.png
+	scale 50
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename GRU_128.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ניתן לראות כי ה
+\begin_inset Formula $RNN$
+\end_inset
+
+ איננו מתכנס ואיננו מצליח ללמוד את הדאטה, ואילו ה
+\begin_inset Formula $GRU$
+\end_inset
+
+ מצליח הרבה יותר - ה
+\begin_inset Formula $accuracy$
+\end_inset
+
+ עולה בצורה מהירה באפוק הראשון, ולאחר מכן נשאר סביב ה
+\begin_inset Formula $80\%$
+\end_inset
+
+.
+ גם ה
+\begin_inset Formula $loss$
+\end_inset
+
+ יורד, כאשר סביבות האיטרציה ה
+\begin_inset Formula $100$
+\end_inset
+
+ ניתן להבחין ב
+\begin_inset Formula $overfit$
+\end_inset
+
+ המתרחש על הדאטה, בהפרדה בין ה
+\begin_inset Formula $test\ loss$
+\end_inset
+
+ וה
+\begin_inset Formula $train\ loss$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+אנחנו מבקשים להציע הסבר לפער המשמעותי בין המודלים השונים, בכך שה
+\begin_inset Formula $GRU$
+\end_inset
+
+, בדומה ל
+\begin_inset Formula $LSTM$
+\end_inset
+
+, מאפשר למודל למשקל בין המידע שהתקבל מהמילים הקודמות במשפט, לבין המידע המתקבל
+ מהמילה החדשה - בעוד במודל ה
+\begin_inset Formula $RNN$
+\end_inset
+
+, הפונקציות קבועות, ולא ניתן לשלוט בשאלת היחס בין הזיכרון ארוך הטווח לקלט
+ החדש.
+\end_layout
+
+\begin_layout Standard
+תכונה זו חשובה במיוחד במשימת 
+\begin_inset Formula $Sentiment\ Analysis$
+\end_inset
+
+, היות שמילת היפוך בסוף המשפט יכולה להשפיע בצורה מהותית על המשמעות של כל
+ המילים שנאמרו לפניה, וכן מילים שרחוקות זו מזו יכולות להיות בעלות השפעות
+ שונות מאוד - זניחות לחלוטין או חשובות במיוחד, זו על זו.
+\end_layout
+
+\begin_layout Standard
+נתבונן בדוגמאות הממחישות את ההבדלים )שני המוצגים כאן עם מימד 
+\begin_inset Formula $128$
+\end_inset
+
+(:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename RNN_128_res_om_test_1.jpg
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename GRU_128_res_on_test_1.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ניתן לראות שבעוד ה
+\begin_inset Formula $RNN$
+\end_inset
+
+ לא מצליח להבין את העומק של המשפטים, ה
+\begin_inset Formula $GRU$
+\end_inset
+
+ מצליח בכך.
+ זאת על אף שהמילים בדוגמאות הן מבלבלות, שכן השתמשנו במילים חיוביות במשפט
+ שבמהותו הוא שלילי, ולהיפך )משפטים מסוג זה יבלבלו לגמרי את המודל 
+\begin_inset Formula $MLP$
+\end_inset
+
+ בסעיף הבא, שממצע את המשקולות של מילים בודדות, מבלי להתייחס לקונטקסט(.
 \end_layout
 
 \begin_layout Subsubsection
