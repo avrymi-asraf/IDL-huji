@@ -882,26 +882,6 @@ today
 \end_layout
 
 \begin_layout Standard
-
-\color red
-לא מצליח לשחזר את זה עדיין על מימד פנימי של 
-\begin_inset Formula $64$
-\end_inset
-
-, הקוד התחרבש.
- אם נצליח לתקן אותו, אני צופה שיצא משהו דומה, מבחינתי מקסימום לבקש ממישהו
- את ה
-\begin_inset Formula $pth$
-\end_inset
-
- שלהם עבור 
-\begin_inset Formula $64$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
 נשווה בין התוצאות של ה
 \begin_inset Formula $RNN$
 \end_inset
@@ -935,6 +915,31 @@ today
 \end_layout
 
 \begin_layout Standard
+ועבור מימד פנימי של 
+\begin_inset Formula $64$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename RNN_64.png
+	scale 50
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename GRU_64.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 ניתן לראות כי ה
 \begin_inset Formula $RNN$
 \end_inset
@@ -957,7 +962,7 @@ today
 \end_inset
 
  יורד, כאשר סביבות האיטרציה ה
-\begin_inset Formula $100$
+\begin_inset Formula $100-125$
 \end_inset
 
  ניתן להבחין ב
@@ -973,6 +978,45 @@ today
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+הבחנה זו מתרחשת בצורה ברורה יותר במודל עם מימד פנימי של 
+\begin_inset Formula $128$
+\end_inset
+
+, נוכל להבחין כי המודל של 
+\begin_inset Formula $64$
+\end_inset
+
+ הוא חזק פחות, ותופעת ה
+\begin_inset Formula $over\ fit$
+\end_inset
+
+ ב
+\begin_inset Formula $GRU$
+\end_inset
+
+ מתרחשת אצלו בצורה עדינה יותר, ומתחילה באיטרציה מאוחרת יותר, אם כי ניתן
+ לראות אותה גם במודל זה, באופן ברור למדי.
+ גם במודל ה
+\begin_inset Formula $RNN$
+\end_inset
+
+, הווריאביליות של ה
+\begin_inset Formula $accuracy$
+\end_inset
+
+ במודל של ה
+\begin_inset Formula $64$
+\end_inset
+
+ היא רחבה הרבה יותר מזו של המודל 
+\begin_inset Formula $128$
+\end_inset
+
+, מה שמראה על החוזק של המודל, גם במצבים שבהם הוא לא מצליח ללמוד את הדאטה
+ בצורה טובה.
 \end_layout
 
 \begin_layout Standard
@@ -1004,11 +1048,35 @@ today
 \end_layout
 
 \begin_layout Standard
-נתבונן בדוגמאות הממחישות את ההבדלים )שני המוצגים כאן עם מימד 
+נתבונן בדוגמאות הממחישות את ההבדלים )אם לא צויין שמדובר במודל 
 \begin_inset Formula $128$
 \end_inset
 
+, אזי הכוונה למודל עם מימד פנימי 
+\begin_inset Formula $64$
+\end_inset
+
 (:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename RNN_64_res_on_test_1.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename GRU_64_res_on_test1.jpg
+	scale 50
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1029,21 +1097,57 @@ today
 \end_layout
 
 \begin_layout Standard
-ניתן לראות שבעוד ה
-\begin_inset Formula $RNN$
-\end_inset
-
- לא מצליח להבין את העומק של המשפטים, ה
+ניתן לראות שעבור בחירה של משפטים מבלבלים במיוחד, בהם הסנטימנט של פסוקית
+ מסויימת במשפט מנוגדת לסנטימנט של המשפט כולו, התוצאות עבור המשפטים הללו
+ בלבלה גם את ה
 \begin_inset Formula $GRU$
 \end_inset
 
- מצליח בכך.
- זאת על אף שהמילים בדוגמאות הן מבלבלות, שכן השתמשנו במילים חיוביות במשפט
- שבמהותו הוא שלילי, ולהיפך )משפטים מסוג זה יבלבלו לגמרי את המודל 
-\begin_inset Formula $MLP$
+, בסופו של דבר, מודל ה
+\begin_inset Formula $RNN$
 \end_inset
 
- בסעיף הבא, שממצע את המשקולות של מילים בודדות, מבלי להתייחס לקונטקסט(.
+ לא הצליח ללמוד את הדאטה, ומנבא את אותה תוצאה באופן עקבי עבור כל המשפטים
+ )נשים לב גם ל
+\begin_inset Formula $confidence$
+\end_inset
+
+ הקבוע על כל המשפטים( - בעוד ה
+\begin_inset Formula $GRU$
+\end_inset
+
+ מסווג הן כחיובי והן כשלילי משפטים - כלומר, אמנם הצלחנו לבלבל אותו, אבל
+ הוא ניסה ללמוד את הדאטה.
+ )נשים לב כי מופיעות בדוגמאות משפטים שה
+\begin_inset Formula $RNN$
+\end_inset
+
+ הצליח יותר מה
+\begin_inset Formula $GRU$
+\end_inset
+
+, וגם להיפך, כפי שנדרש בתרגיל(.
+\end_layout
+
+\begin_layout Standard
+יצויין כי מבחינת זמני ריצה, ועומס הפעולות על כל רשת - ה
+\begin_inset Formula $RNN$
+\end_inset
+
+ רץ הרבה יותר מהר מה
+\begin_inset Formula $GRU$
+\end_inset
+
+, וכן כי ב
+\begin_inset Formula $RGU$
+\end_inset
+
+ מתבצעים יותר חישובים בכל נוירון, כך שעבור משימות אחרות, יש עדיפות לשימוש
+ דווקא ב
+\begin_inset Formula $RNN$
+\end_inset
+
+, אולם המשימה שלנו איננה כזו.
 \end_layout
 
 \begin_layout Subsubsection
