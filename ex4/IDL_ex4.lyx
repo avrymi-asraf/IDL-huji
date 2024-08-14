@@ -398,6 +398,72 @@ today
 1
 \end_layout
 
+\begin_layout Standard
+נמצא את נוסחת לנג'ווין המשיגה שיווי משקל סביב ההתפלגות הנורמלית 
+\begin_inset Formula $\mathcal{N}\left(0,1\right)$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+נתחיל מצורה כללית של נוסחת לנג'וין:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{\partial x}{\partial t}​=−∇U(x)+\sqrt{2}​η(t)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כאשר 
+\begin_inset Formula $U\left(x\right)$
+\end_inset
+
+ הוא החלק הדטרמיניסטי, ו
+\begin_inset Formula $\sqrt{2}η(t)$
+\end_inset
+
+ הוא החלק הסטוכסטי.
+\end_layout
+
+\begin_layout Standard
+עבור ההתפלגות הנורמלית הסטנדרטית, נוכל לבחור את נוסחת הפוטנציאל ההרמונית:
+ 
+\begin_inset Formula $U\left(x\right)=\frac{1}{2}\left|\left|x\right|\right|^{2}$
+\end_inset
+
+ נציב ונקבל:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+−∇U(x)=−∇\left(\frac{1}{2}​\sum_{i=1}^{d}​x_{i}^{2}\right)=−x
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{\partial x}{\partial t}=−x+\sqrt{2}η(t)
+\]
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 שאלה
 \family roman
@@ -427,16 +493,33 @@ today
 \noun default
 \color inherit
 2
+\family roman
+\series bold
+\shape smallcaps
+\size larger
+\emph off
 \numeric off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
  
-\end_layout
-
-\begin_layout Subsubsection
-א.
-\end_layout
-
-\begin_layout Subsubsection
-ב.
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+- בוטלה
 \end_layout
 
 \begin_layout Section
@@ -468,6 +551,129 @@ today
 \noun default
 \color inherit
 3
+\end_layout
+
+\begin_layout Subsubsection
+א.
+\end_layout
+
+\begin_layout Standard
+במקרה שבו ה
+\begin_inset Formula $GAN$
+\end_inset
+
+ יתאמן עם מרחב לטנטי נמוך מידי, יש להניח כי האינטרפולציה בין נקודות סמוכות
+ לא תהיה חלקה, היות שלא תהיה אפשרות לבטא את מלוא מרחב האפשרויות הנתונות
+ במרחב הלטנטי.
+ בנוסף, יש להניח שרמת הפירוט והדיוק של המודל יהיו נמוכות יחסית, היות שיש
+ מגבלה משמעותית על היכולת האקספרסיבית של הגנרטור.
+\end_layout
+
+\begin_layout Subsubsection
+ב.
+\end_layout
+
+\begin_layout Standard
+לעומת זאת, במקרה שבו הדיסקרימינטור יהיה חלש מידי, הגנרטור יצליח להערים עליו
+ בקלות יחסית ומבלי להתאמץ, וימצא תמונה ספציפית או מספר תמונות ספציפיות שהוא
+ יקפוץ ביניהן, שאותן הדיסקרימינטור לא יזהה כמזוייפות.
+ במצב כזה, הגנרטור לא יהיה יצירתי כ
+\begin_inset Quotes erd
+\end_inset
+
+כ, ויתקבל מצב של 
+\begin_inset Formula $Mode\ Collapse$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+שאלה
+\family roman
+\series bold
+\shape smallcaps
+\size larger
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+4
+\end_layout
+
+\begin_layout Section
+שאלה
+\family roman
+\series bold
+\shape smallcaps
+\size larger
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+5
+\end_layout
+
+\begin_layout Standard
+נפעל לפי השיטה הבאה:
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+1
+\numeric off
+.
+ נתחיל עם ווקטור אקראי מהמרחב הלטנטי, ונג'נרט באמצעות מודל ה
+\begin_inset Formula $GAN$
+\end_inset
+
+ תמונה מתאימה.
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+2
+\numeric off
+.
+ נבדוק את הסיווג של התמונה באמצעות הקלאספייר, 
 \end_layout
 
 \begin_layout Standard
