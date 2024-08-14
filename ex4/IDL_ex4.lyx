@@ -619,6 +619,105 @@ today
 4
 \end_layout
 
+\begin_layout Standard
+יהי 
+\begin_inset Formula $x\sim P\left(x\right)$
+\end_inset
+
+, 
+\begin_inset Formula $n\sim N\left(0,1\right)$
+\end_inset
+
+.
+ נרצה למצוא את ההתפלגות של 
+\begin_inset Formula $y=x+n$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+היות ש
+\begin_inset Formula $x,n$
+\end_inset
+
+ ב
+\begin_inset Quotes erd
+\end_inset
+
+ת, אזי: 
+\begin_inset Formula $P_{x,n}\left(x,n\right)=P_{x}\left(x\right)P_{n}\left(n\right)$
+\end_inset
+
+.כ
+\end_layout
+
+\begin_layout Standard
+כעת, נמצא את פונקציית ההסתברות המצטברת של 
+\begin_inset Formula $y$
+\end_inset
+
+, לפי קונבולוציה של 
+\begin_inset Formula $x,n$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $p_{y}\left(y\right)=\int p_{x}\left(y-n\right)p_{n}\left(n\right)dn$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+היות ש
+\begin_inset Formula $n$
+\end_inset
+
+ מתפלג נורמלית, אזי פונקציית ההסתברות המצטברת שלו היא: 
+\begin_inset Formula $p_{n}\left(n\right)=\frac{e^{\left(-\frac{1}{2}n^{T}n\right)}}{\left(2\pi\right)^{\frac{d}{2}}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+נציב את הביטוי בפונקציה של 
+\begin_inset Formula $y$
+\end_inset
+
+, ונקבל:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $p_{y}\left(y\right)=\frac{1}{\left(2\pi\right)^{\frac{d}{2}}}\int p_{x}\left(y-n\right)e^{\left(-\frac{1}{2}n^{T}n\right)}dn$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+נבצע חילוף משתנים: 
+\begin_inset Formula $u=y-n$
+\end_inset
+
+, ולכן גם 
+\begin_inset Formula $dn=du$
+\end_inset
+
+.
+ נקבל:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $p_{y}\left(y\right)=\frac{1}{\left(2\pi\right)^{\frac{d}{2}}}\int p_{x}\left(u\right)e^{\left(-\frac{1}{2}\left(y-u\right)^{T}\left(y-u\right)\right)}du=\frac{1}{\left(2\pi\right)^{\frac{d}{2}}}\int p_{x}\left(u\right)e^{\left(-\frac{1}{2}\sum_{i=1}^{d}\left(y_{i}-u_{i}\right)^{2}\right)}du$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Section
 שאלה
 \family roman
@@ -673,7 +772,47 @@ today
 2
 \numeric off
 .
- נבדוק את הסיווג של התמונה באמצעות הקלאספייר, 
+ נבדוק את הסיווג של התמונה באמצעות הקלאספייר, ונקבל את ההסתברויות של הקלאסים
+ השונים עבור התמונה שג'ונרטה.
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+3
+\numeric off
+.
+ נבנה פונקציית 
+\begin_inset Formula $loss$
+\end_inset
+
+, שיש בה שני מרכיבים: א.
+ התמונה מג'ונרטת לפי הקלאס הרצוי.
+ ב.
+ הווקטור הלטנטי לא מתרחק מחוץ למרחב ההתפלגות של הגנרטור.
+\end_layout
+
+\begin_layout Standard
+
+\numeric on
+4
+\numeric off
+.
+ נבצע אימון למודל על מנת שה
+\begin_inset Formula $GAN$
+\end_inset
+
+ יעבוד לפי התפלגות שעבורה פונקציית ה
+\begin_inset Formula $loss$
+\end_inset
+
+ החדשה היא מינימלית.
+\end_layout
+
+\begin_layout Standard
+קיבלנו התפלגות שמחולקת לפי הלייבלים השונים של הקלאספייר.
+ כעת, נוכל לדגום ווקטור לטנטי שסמוך לווקטור של תמונה עם הלייבל הרצוי, וכך
+ לקבל תמונה חדשה עם הלייבל הרצוי.
 \end_layout
 
 \begin_layout Standard
