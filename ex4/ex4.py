@@ -121,11 +121,20 @@ if __name__ == "__main__":
 
     ##################
     # define here your degraded images as deg_x, e.g.,
+    print("start of my code part")
 
     x_true = x[:32].reshape(32,1,32,32).copy()
+    # deg_x = utils_noise_imges.noise_image_quaters(x_true, half=False)
+    # deg_x = utils_noise_imges.noise_image_quaters(x_true, half=True)
+    deg_x = utils_noise_imges.blur_image(x_true, twice=False)
+    # deg_x = utils_noise_imges.blur_image(x_true, twice=True)
 
-    deg_x = 0.7071 * (x_true + np.random.randn(32,1,32,32).astype(np.float32))
-    noise = 0.5
+    # noise = utils_noise_imges.estimate_vanilla_noise_level(deg_x, x_true)
+    # print("vanilla noise: ", noise)
+    # noise = utils_noise_imges.estimate_noise_tv(deg_x, x_true)
+    # print("tv noise: ", noise)
+    noise = utils_noise_imges.estimate_noise_nps(deg_x, x_true)
+    print("nps noise: ", noise)
 
     # end of your code
     ##################
@@ -145,7 +154,7 @@ if __name__ == "__main__":
     # First rows show the denoising progression
     for percent_idx in range(percents):
         itr_num = int(round(percent_idx / (percents-1) * (len(samples)-1)))
-        print(itr_num)
+        print("itr_num: ", itr_num)
         for i in range(nrows * ncols):
             row, col = i // ncols, i % ncols
             offset = 32 * ncols * (percent_idx)

@@ -138,11 +138,10 @@ class ScoreMatchingModel(nn.Module):
         """
  
         num_sampling_timesteps = int(21.0 * noise)
-        print("num_sampling_timesteps")
-        print(num_sampling_timesteps)
+        print("num_sampling_timesteps", num_sampling_timesteps)
 
         linspace = torch.linspace(noise, 0.0, num_sampling_timesteps + 1, device=device)
-        print(linspace)
+        print("linspace: ", linspace)
         sigmas = self.test_sigma_schedule.get_sigma_ppf(linspace)
         
         sigma_start = torch.empty((bsz,), device=device)
@@ -156,7 +155,7 @@ class ScoreMatchingModel(nn.Module):
         else:
             sigma_max = sigmas[0]
             x = torch.from_numpy(x0).to(device) + torch.randn((bsz, *self.input_shape), device=device) * sigma_max
-            print(sigma_max)
+            print("sigma_max: ", sigma_max)
 
         samples = torch.empty((num_sampling_timesteps + 1, bsz, *self.input_shape), device=device)
         samples[0] = x * self.sigma_data / (sigma_max ** 2 + self.sigma_data ** 2) ** 0.5
@@ -164,8 +163,8 @@ class ScoreMatchingModel(nn.Module):
         self.sampler.reset()
 
         for idx, (scalar_sigma_start, scalar_sigma_end) in enumerate(zip(sigmas[0:-1], sigmas[1:])):
-            print(idx)
-            print(scalar_sigma_start)
+            print("idx: ", idx)
+            print("scalar_sigma_start", scalar_sigma_start)
             sigma_start.fill_(scalar_sigma_start)
             sigma_end.fill_(scalar_sigma_end)
 
