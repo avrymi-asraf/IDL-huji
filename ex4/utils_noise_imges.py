@@ -1,4 +1,5 @@
 import numpy as np
+from scipy import stats
 
 """
 take a MNSIT image and black out a half or a quarter of the pixels, depending on the value of the noise parameter.
@@ -80,3 +81,40 @@ def estimate_noise_nps(degraded_images, clean_images):
         noise_levels.append(noise_level)
 
     return np.mean(noise_levels) * 5e-3 # todo: might need to adjust this factor
+
+
+def estimate_noise_histogram(degraded_images, clean_images, num_bins=256):
+    """
+    Estimate the noise level using histogram analysis.
+
+    Parameters:
+    - degraded_images: list or array of degraded images.
+    - clean_images: list or array of clean images.
+    - num_bins: number of bins to use in the histogram.
+
+    Returns:
+    - estimated_noise_level: the estimated noise level normalized to (0, 1].
+    """
+    noise_levels = []
+
+    for degraded, clean in zip(degraded_images, clean_images):
+        # Calculate noise
+        noise = degraded - clean
+
+        # Create histogram of noise
+        hist, _ = np.histogram(noise, bins=num_bins, range=(-1, 1), density=True)
+
+        # Fit a Gaussian distribution to the histogram
+        bin_centers = np.linspace(-1, 1, num_bins)
+        gaussian_params = stats.norm.fit(noise.flatten())
+        gaussian_fit = stats.norm.pdf(bin_centers, *gaussian_params)
+
+        # Calculate the difference between the histogram and the Gaussian fit
+        diff = np.abs(hist - gaussian_fit)
+
+        # Estimate noise level as the sum of absolute differences
+        noise_level = np.sum(diff) / num_bins
+        noise_levels.append(noise_level)
+
+    # Return the average noise level across all image pairs
+    return np.mean(noise_levels)

@@ -836,36 +836,101 @@ today
 .
 \end_layout
 
-\begin_layout Subsubsection
-
-\numeric on
-2
-\numeric off
-.
+\begin_layout Standard
+השתמשנו בשתי פונקציות שונות, המשתמשות בשיטות שונות לחשב את רמת הרעש הרצויה,
+ ומצאנו שכל אחת מהן מתאימה יותר ונותנת תוצאות יפות יותר, עבור אופנים שונים
+ של השחתת התמונות.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Standard
+השיטה הראשונה היא 
+\begin_inset Formula $Total\ Variation\ Minimization$
+\end_inset
 
-\numeric on
-3
-\numeric off
 .
+ הרציונל הוא למנמם את הווריאציה הכוללת בין הפיקסלים בתמונה, כלומר להחליק
+ את הגרדיאנטים שבין כל שני פיקסלים בתמונה.
+ הנחת היסוד היא שרעש הוא אנומליה, ובדר
+\begin_inset Quotes erd
+\end_inset
+
+כ פיסקלים סמוכים שלא ניזוקו מהרעש יהיו עם גרדיאנט קטן יותר ביניהם, לעומת
+ פיסקלים שניזוקו מרעש.
+ נשים לב שהקצוות החדים כן נשמרים, היות שהגרדיאנט בין כל פיקסל לפיקסלים הסמוכים
+ לו כחלק מאותו הקו הם קטנים, כמו גם העובדה שהשיטה משתמשת ברגולריזציה על
+ ערך ה
+\begin_inset Formula $TV$
+\end_inset
+
+ למול הפרשים בערך מוחלט בין תמונת המקור לתמונה המעוותת.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Standard
+השיטה השניה היא 
+\begin_inset Formula $Histogram-Based\ Noise\ Estimation$
+\end_inset
 
-\numeric on
-4
-\numeric off
 .
+ הרציונל הוא לנתח את ההיסטוגרמה של התמונות, ולהשוות בין התפלגות הערכים של
+ הפיקסלים השונים )על ה
+\begin_inset Formula $gray\ scale$
+\end_inset
+
+ בתרגיל שלנו( - מתוך הבנה שהרעש יצור אנומליות בתוך ההיסטוגרמה, נוכל למדוד
+ את ההפרשים בין העמודות השונות של ההיסטוגרמה וכך לחשב את הרעש.
+ בנוסחה שלנו, השתמשנו בהנחה שהרעש שהתווסף מתפלג באופן גאוסייאני, מה שלא
+ מדוייק להשחתות שביצענו, ולכן טוב להשוות גם לשיטה האחרת אותה הצענו.
+ לבסוף מתבצע נרמול של הרעש, על מנת להחזיר ערכים בתחום 
+\begin_inset Formula $(0,1]$
+\end_inset
+
+ כפי שהקוד דורש כקלט.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Standard
+נדגים את הביצועים של שתי הפונקציות שמצאנו, על
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ שתי הרמות של כל אחת מההשחתות שביצענו לתמונות.
+\end_layout
 
-\numeric on
-5
-\numeric off
-.
+\begin_layout Standard
+מקראה חשובה להבנת התוצאות המוצגות: בעמודה הימנית, התמונה המושחתת.
+ בעמודה השניה מימין, התמונה המקורית.
+ בעמודה השמאלית, התמונה המושחתת לאחר הוספת הרעש, ובעמודות האמצעיות - שלבים
+ מתוך תהליך ה
+\begin_inset Formula $denoising$
+\end_inset
+
+, כאשר העמודה השלישית מימין היא עמודת הפלט של המודל.
+\end_layout
+
+\begin_layout Standard
+השחתת חצי מהתמונה, שיטת חישוב היסטוגרמה:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images_ex4/half_histogram.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+השתחתת רבע מהתמונה, שיטת חישוב היסטוגרמה:
 \end_layout
 
 \end_body

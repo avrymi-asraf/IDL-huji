@@ -131,10 +131,12 @@ if __name__ == "__main__":
 
     # noise = utils_noise_imges.estimate_vanilla_noise_level(deg_x, x_true)
     # print("vanilla noise: ", noise)
-    # noise = utils_noise_imges.estimate_noise_tv(deg_x, x_true)
-    # print("tv noise: ", noise)
-    noise = utils_noise_imges.estimate_noise_nps(deg_x, x_true)
-    print("nps noise: ", noise)
+    noise = utils_noise_imges.estimate_noise_tv(deg_x, x_true)
+    print("tv noise: ", noise)
+    # noise = utils_noise_imges.estimate_noise_nps(deg_x, x_true)
+    # print("nps noise: ", noise)
+    # noise = utils_noise_imges.estimate_noise_histogram(deg_x, x_true)
+    # print("histogram noise: ", noise)
 
     # end of your code
     ##################
