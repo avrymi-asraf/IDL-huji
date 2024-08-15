@@ -916,6 +916,149 @@ today
 \end_layout
 
 \begin_layout Standard
+השחתת חצי מהתמונה, שיטת חישוב 
+\begin_inset Formula $TV$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images_ex4/half_tv.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+נשים לב שהשחזור של התמונות התבצע בצורה חלקית מאוד, ולא ניתן לזהות אותן,
+ כלומר - הערכת הרעש לוקה בחסר.
+\end_layout
+
+\begin_layout Standard
+ננסה להשתמש בשיטה זו, ולהכפיל את הרעש בפקטור של
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $1.6$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images_ex4/half_tv_factor16.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+נראה שגם כאן, הרבה מהתמונות לא היו עוברות קלאסיפיקציה נכונה, אולם הן יוצאות
+ חדות וברורות יותר.
+\end_layout
+
+\begin_layout Standard
+השחתת רבע מהתמונה, שיטת חישוב 
+\begin_inset Formula $TV$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images_ex4/quator_tv.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ועם פקטור של 
+\begin_inset Formula $0.8$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images_ex4/quter_tv_factor08.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+כלומר, מצאנו ש
+\begin_inset Formula $TV$
+\end_inset
+
+ איננה מצליחה לחזות את הרעש בצורה טובה בפני עצמה, אולם ניתן לעשות 
+\begin_inset Formula $scale$
+\end_inset
+
+ לרעש שהתקבל מהחיזוי, ולהתאים אותו בצורה טובה יחסית לבעיה הספציפית.
+\end_layout
+
+\begin_layout Standard
+טשטוש כפול, שיטת חישוב 
+\begin_inset Formula $TV$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images_ex4/double_blur_tv.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+טשטוש בודד, שיטת חישוב 
+\begin_inset Formula $TV$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images_ex4/single_blur_tv.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 השחתת חצי מהתמונה, שיטת חישוב היסטוגרמה:
 \end_layout
 
@@ -930,7 +1073,50 @@ today
 \end_layout
 
 \begin_layout Standard
+נוכל לראות שבחלק מהתמונות השחזור התבצע בצורה טובה, ואילו באחרות - אם נפעיל
+ קלאסיפיקציה, נקבל קלאס אחר מזה שבתמונה המקורית.
+\end_layout
+
+\begin_layout Standard
 השתחתת רבע מהתמונה, שיטת חישוב היסטוגרמה:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images_ex4/quator_histogram.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+טשטוש כפול, שיטת חישוב היסטוגרמה:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images_ex4/double_blur_histogram.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+טשטוש בודד, שיטת חישוב היסטוגרמה:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images_ex4/single_blur_histogram.png
+	scale 50
+
+\end_inset
+
+
 \end_layout
 
 \end_body
