@@ -1041,6 +1041,15 @@ today
 \end_layout
 
 \begin_layout Standard
+ניתן לראות ששיטת 
+\begin_inset Formula $TV$
+\end_inset
+
+ איננה מצליחה להתמודד עם טשטוש כפול בצורה מוצלחת, ומנבאת רעש גבוה מאוד -
+ מה שיוצר טשטוש גדול יחסית בקלאסיפיקציה של הפלט.
+\end_layout
+
+\begin_layout Standard
 טשטוש בודד, שיטת חישוב 
 \begin_inset Formula $TV$
 \end_inset
@@ -1056,6 +1065,14 @@ today
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+אמנם, עבור טשטוש בודד, שיטת 
+\begin_inset Formula $TV$
+\end_inset
+
+ מצליחה להתמודד בצורה טובה.
 \end_layout
 
 \begin_layout Standard
@@ -1092,6 +1109,26 @@ today
 \end_layout
 
 \begin_layout Standard
+התמונות יוצאות לא מספיק ברורות, והקלאסיפיקציה תתקבל אחרת.
+ נראה שהשערת הרעש היתה גבוהה מידי.
+ אם נשנה אותו בפקטור של 
+\begin_inset Formula $0.8$
+\end_inset
+
+, נקבל תוצאות טובות יותר:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images_ex4/quter_tv_factor08.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 טשטוש כפול, שיטת חישוב היסטוגרמה:
 \end_layout
 
@@ -1106,6 +1143,11 @@ today
 \end_layout
 
 \begin_layout Standard
+ניתן לראות שהמודל מתקשה להתמודד עם השחתה כזו, אולם עדיין יש אחוז לא מבוטל
+ של התמונות שניתן לזיהוי.
+\end_layout
+
+\begin_layout Standard
 טשטוש בודד, שיטת חישוב היסטוגרמה:
 \end_layout
 
@@ -1117,6 +1159,17 @@ today
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+ביצועי המודל על טשטוש יחיד קרובים להיות משביעי רצון.
+ לא תמיד התמונה ברורה מספיק, אבל יש מיעוט של מקרים שבהם הקלאסיפיקציה תהיה
+ שגויה.
+\end_layout
+
+\begin_layout Standard
+הקטנת פקטור הרעש הובילה אותנו לתמונות ברורות יותר, אך עם קלסיפיקציה שגויה
+ יותר.
 \end_layout
 
 \end_body
