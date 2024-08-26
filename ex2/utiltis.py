@@ -6,7 +6,7 @@ import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
 
 
-def import_MNIST_dataset():
+def import_MNIST_dataset(mini_data=False):
     """
     Downloads the MNIST dataset and loads it into DataLoader objects for training and testing.
 
@@ -25,7 +25,10 @@ def import_MNIST_dataset():
     # Download and load the testing dataset
     testset = torchvision.datasets.MNIST(root='./data', train=False, download=True, transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=64, shuffle=False)
-
+    if mini_data:
+            indices = torch.arange(100)
+            mini_train_set = torch.utils.data.Subset(trainset,indices)
+            trainloader = torch.utils.data.DataLoader(mini_train_set, batch_size=16, shuffle=False)
+            return trainloader, testloader
     return trainloader, testloader
-
 

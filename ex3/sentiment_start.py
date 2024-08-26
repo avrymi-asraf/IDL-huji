@@ -18,7 +18,7 @@ batch_size = 32
 output_size = 2
 hidden_size = 64        # to experiment with
 
-run_recurrent = False    # else run Token-wise MLP
+run_recurrent = True    # else run Token-wise MLP
 use_RNN = True          # otherwise GRU
 atten_size = 0          # atten > 0 means using restricted self atten
 
@@ -61,12 +61,12 @@ class ExRNN(nn.Module):
 
         # RNN Cell weights
         self.in2hidden = nn.Linear(input_size + hidden_size, hidden_size)
-        # what else?
+        self.output_mlp = nn.Linear(hidden_size,output_size)
 
     def name(self):
         return "RNN"
 
-    def forward(self, x, hidden_state):
+    def forward(self, x, hidden_state): #/1,time,(100,100)
 
         # Implementation of RNN cell
         mid = torch.cat((x, hidden_state), 1)
@@ -83,19 +83,25 @@ class ExGRU(nn.Module):
     def __init__(self, input_size, output_size, hidden_size):
         super(ExGRU, self).__init__()
         self.hidden_size = hidden_size
-        # GRU Cell weights
-        # self.something =
-        # etc ...
+        self.sigmoid = torch.sigmoid
+        self.tanh = torch.tanh
+        self.update_gate = nn.Linear(input_size+hidden_size,hidden_size)
+        self.reset_gate = nn.Linear(input_size+hidden_size,hidden_size)
+        self.fc = nn.Linear(input_size + hidden_size, hidden_size)
+        self.output_mlp = nn.Linear(hidden_size,output_size)
 
     def name(self):
         return "GRU"
 
     def forward(self, x, hidden_state):
-
-        # Implementation of GRU cell
-
-        # missing implementation
-
+        cat_tensor = torch.cat([hidden_state,x],dim=1)
+        zt = self.sigmoid(self.update_gate(cat_tensor))
+        rt = self.sigmoid(self.reset_gate(cat_tensor))
+        mid = hidden_state*rt
+        cat_mid = torch.cat([mid,x], dim=1)
+        h_hat = self.tanh(self.fc(cat_mid))
+        hidden = ((1-zt)*hidden_state) + (zt*h_hat)
+        output = self.output_mlp(hidden)
         return output, hidden
 
     def init_hidden(self, bs):
@@ -129,7 +135,8 @@ class ExMLP(nn.Module):
 
 class ExLRestSelfAtten(nn.Module):
     def __init__(self, input_size, output_size, hidden_size):
-        super(ExRestSelfAtten, self).__init__()
+        pass # todo: fix
+        super(ExLRestSelfAtten, self).__init__()
 
         self.input_size = input_size
         self.output_size = output_size

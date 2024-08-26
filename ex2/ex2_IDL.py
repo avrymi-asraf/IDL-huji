@@ -105,7 +105,7 @@ class AE_MLP(nn.Module):
         return x
 
 
-def train_classifier_encoder(model, train_loader, test_loader, epochs, loss_func=nn.CrossEntropyLoss(), device=DEVICE):
+def train_classifier_encoder(model, train_loader, test_loader, epochs, save_path, loss_func=nn.CrossEntropyLoss(), device=DEVICE,save_model=True):
     model = model.to(device)
     optimazer = torch.optim.Adam(model.parameters())
 
@@ -144,7 +144,7 @@ def train_classifier_encoder(model, train_loader, test_loader, epochs, loss_func
     # fig.write_image(save_path)
     fig.show()
 
-def train_AE(model, train_loader, test_loader, epochs, loss_func=nn.L1Loss(), device=DEVICE):
+def train_AE(model, train_loader, test_loader, epochs, save_path, loss_func=nn.L1Loss(), device=DEVICE, save_mode=None):
     model = model.to(device)
     optimazer = torch.optim.Adam(model.parameters())
 
